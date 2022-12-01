@@ -15,7 +15,10 @@ private val DarkColorPalette = darkColors(
 private val LightColorPalette = lightColors(
         primary = Purple500,
         primaryVariant = Purple700,
-        secondary = Teal200
+        secondary = Teal200,
+
+        // 背景色は、TheremのBackgroundで設定できます。
+    background = BackgroundLight
 
         /* Other default colors to override
     background = Color.White,
@@ -39,6 +42,6 @@ fun PostMyStoryTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Compo
             colors = colors,
             typography = Typography,
             shapes = Shapes,
-            content = content
+            content = content,
     )
 }

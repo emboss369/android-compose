@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                         0
                     ),
                     Message(
-                        "友達と遊ぶのにいい場所だと思ったし、店の前で働くのも楽しかった。".repeat(5),
+                        "友人と過ごすのに良い場所だし、店の前で働くのも楽しいです。".repeat(5),
                         "https://picsum.photos/seed/4/200",
                         462
                     )
@@ -104,74 +105,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CaptionView(onClick:() -> Unit, onChange: (String) -> Unit) {
-    var text by remember { mutableStateOf("") }
-    Column() {
-        TextField(
-            value = text,
-            onValueChange = { newText ->
-                text = newText
-                onChange(text) },
-            label = { Text("キャプションを書く") }
-        )
-        Button(onClick = {
-            onClick()
-        }) {
-Text(text = "記事を追加する")
-        }
-    }
-
-}
-
-@Composable
-fun PhotoGrid(onClick: (String) -> Unit) {
-    val photos = mutableListOf<String>().apply {
-        for(i in 1..24) {
-            add("https://picsum.photos/seed/${i}/200")
-        }
-    }
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp)
-    ) {
-
-        items(items = photos) { photo ->
-            PhotoItem(photo, onClick)
-        }
-    }
-}
-
-
-@Composable
-fun PhotoItem(photo: String, onClick: (String) -> Unit) {
-
-    AsyncImage(
-        // タップした画像のURLを返す。
-        modifier = Modifier.clickable { onClick(photo) },
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(photo)
-            .crossfade(true)
-            // coliのAsyncImageは高機能、メモリキャッシュ機能・ディスクキャッシュ機能も標準装備。無効にしたいばあいはdiskCachePolicyでDISABLEDにすることもできます。
-            //.memoryCachePolicy(CachePolicy.DISABLED)
-            .diskCachePolicy(CachePolicy.DISABLED)
-            //.transformations(RoundedCornersTransformation(40f))
-            .build(),
-
-        contentDescription = null,
-        contentScale = ContentScale.FillWidth
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PhotoGridPreview() {
-    PostMyStoryTheme {
-        PhotoGrid(){}
-    }
-}
-
-
-
-@Composable
 fun Greeting(name: String) {
 
     LazyColumn {
@@ -181,7 +114,7 @@ fun Greeting(name: String) {
         }
 
         // Add 5 items
-        items(100) { index ->
+        items(5) { index ->
             Text(text = "Item: $index")
         }
 
@@ -192,30 +125,68 @@ fun Greeting(name: String) {
     }
 }
 
-@Stable
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    Greeting(name = "Compose!")
+}
+
+// @Stable
+// すべての入力が安定していて変化がなければ、再コンポジションをスキップ
+// パフォーマンスに影響
+@Stable // https://developer.android.com/jetpack/compose/lifecycle?hl=ja
 data class Message(
     val caption: String,
     val image: String,
     val nice: Int
 )
 
-//@Composable
-//fun MessageRow(message: Message) {
-//    Text(text = message.title)
-//}
+@Composable
+fun MessageRow(message: Message) {
+    Text(text = message.caption)
+}
 
-//@Composable
-//fun MessageList(messages: List<Message>) {
-//    LazyColumn {
-//        // itemsを使うには
-//        // import androidx.compose.foundation.lazy.items
-//        // を明示的にインポートする必要がある。
-//        items(messages) { message ->
-//            MessageRow(message)
-//        }
-//    }
-//}
-
+@Composable
+fun MessageList(messages: List<Message>) {
+    LazyColumn {
+        // itemsを使うには
+        // import androidx.compose.foundation.lazy.items
+        // を明示的にインポートする必要がある。
+        items(messages) { message ->
+            MessageRow(message)
+        }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun MessageListPreview() {
+    val messages = mutableListOf(
+        Message(
+            "1".repeat(5),
+            "https://picsum.photos/seed/1/200",
+            11
+        ),
+        Message(
+            "2".repeat(5),
+            "https://picsum.photos/seed/2/200",
+            250
+        ),
+        Message(
+            "3".repeat(5),
+            "https://picsum.photos/seed/3/200",
+            0
+        ),
+        Message(
+            "4".repeat(5),
+            "https://picsum.photos/seed/4/200",
+            462
+        )
+    )
+    PostMyStoryTheme {
+        //Greeting("Android")
+        MessageList(messages = messages)
+    }
+}
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -254,6 +225,56 @@ fun StickyHeaderPreview() {
         StickyHeader()
     }
 }
+
+@Composable
+fun PhotoItem(photo: String, onClick: (String) -> Unit) {
+
+    AsyncImage(
+        // タップした画像のURLを返す。
+        modifier = Modifier.clickable { onClick(photo) },
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(photo)
+            .crossfade(true)
+            // coliのAsyncImageは高機能、メモリキャッシュ機能・ディスクキャッシュ機能も標準装備。無効にしたいばあいはdiskCachePolicyでDISABLEDにすることもできます。
+            //.memoryCachePolicy(CachePolicy.DISABLED)
+            .diskCachePolicy(CachePolicy.DISABLED)
+            //.transformations(RoundedCornersTransformation(40f))
+            .build(),
+        placeholder = painterResource(id = R.drawable.now_loading),
+        contentDescription = null,
+        contentScale = ContentScale.FillWidth
+    )
+}
+@Preview(showBackground = true)
+@Composable
+fun PhotoItemPreview() {
+    PhotoItem(photo = "https://picsum.photos/seed/1/200", onClick = {})
+}
+
+
+@Composable
+fun PhotoGrid(onClick: (String) -> Unit) {
+    val photos = mutableListOf<String>().apply {
+        for(i in 1..24) {
+            add("https://picsum.photos/seed/${i}/200")
+        }
+    }
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp)
+    ) {
+
+        items(items = photos) { photo ->
+            PhotoItem(photo, onClick)
+        }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun PhotoGridPreview() {
+    PhotoGrid(){}
+}
+
+
 
 
 @Composable
@@ -302,21 +323,6 @@ fun ListScreen(messages: MutableList<Message>, onClick: () -> Unit) {
 }
 
 @Composable
-fun ArticleList(messages: MutableList<Message>) {
-    val state = rememberLazyListState()
-    LazyColumn(state = state) {
-        // itemsを使うには
-        // import androidx.compose.foundation.lazy.items
-        // を明示的にインポートする必要がある。
-        items(messages) { message ->
-            ArticleView(message = message)
-        }
-    }
-}
-
-
-
-@Composable
 fun ArticleView(message: Message) {
     Column(
         // Columnがスクロールするように設定するには次のように
@@ -349,7 +355,7 @@ fun ArticleView(message: Message) {
                 .diskCachePolicy(CachePolicy.DISABLED)
                 .transformations(RoundedCornersTransformation(40f))
                 .build(),
-
+            placeholder = painterResource(id = R.drawable.now_loading),
             contentDescription = null,
             contentScale = ContentScale.FillWidth
         )
@@ -376,7 +382,21 @@ fun ArticleView(message: Message) {
 
 @Preview(showBackground = true)
 @Composable
-fun ArticlePreview() {
+fun ArticleViewPreview() {
+    val message =
+        Message(
+            "伊賀百貨店は、今月3月25日に大阪市内にオープンしたばかりの新しいお店です。".repeat(5),
+            "https://picsum.photos/seed/1/200",
+            11
+        )
+    PostMyStoryTheme {
+        ArticleView(message = message)
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ListScreenPreview() {
     val messages = mutableListOf(
         Message(
             "伊賀百貨店は、今月3月25日に大阪市内にオープンしたばかりの新しいお店です。".repeat(5),
@@ -402,4 +422,43 @@ fun ArticlePreview() {
     PostMyStoryTheme {
         ListScreen(messages = messages){}
     }
+}
+
+@Composable
+fun ArticleList(messages: MutableList<Message>) {
+    val state = rememberLazyListState()
+    LazyColumn(state = state) {
+        // itemsを使うには
+        // import androidx.compose.foundation.lazy.items
+        // を明示的にインポートする必要がある。
+        items(messages) { message ->
+            ArticleView(message = message)
+        }
+    }
+}
+
+
+@Composable
+fun CaptionView(onClick:() -> Unit, onChange: (String) -> Unit) {
+    var text by remember { mutableStateOf("") }
+    Column() {
+        TextField(
+            value = text,
+            onValueChange = { newText ->
+                text = newText
+                onChange(text) },
+            label = { Text("キャプションを書く") }
+        )
+        Button(onClick = {
+            onClick()
+        }) {
+            Text(text = "記事を追加する")
+        }
+    }
+
+}
+@Preview(showBackground = true)
+@Composable
+fun CaptionViewPreview() {
+    CaptionView(onClick = {}, onChange = {})
 }
