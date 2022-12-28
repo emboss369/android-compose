@@ -193,7 +193,8 @@ fun MessageListPreview() {
 fun StickyHeader() {
     val sections = listOf("A", "B", "C", "D", "E", "F", "G")
 
-    LazyColumn(reverseLayout = false, contentPadding = PaddingValues(6.dp)) {
+    LazyColumn(reverseLayout = false,
+        contentPadding = PaddingValues(6.dp)) {
         sections.forEach { section ->
             // stickyHeader を使えば、セクションを使えます。
             // しかしこれは本稿執筆時点では実験的な機能で
@@ -228,7 +229,8 @@ fun StickyHeaderPreview() {
 
 @Composable
 fun PhotoItem(photo: String, onClick: (String) -> Unit) {
-
+    // coil
+    // https://coil-kt.github.io/coil/compose/
     AsyncImage(
         // タップした画像のURLを返す。
         modifier = Modifier.clickable { onClick(photo) },
