@@ -8,11 +8,26 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScrollableTabRow
 import androidx.compose.material.Surface
+import androidx.compose.material.Tab
+import androidx.compose.material.TabRow
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
@@ -33,11 +48,12 @@ class MainActivity : ComponentActivity() {
 
                     //Column() {
                         //var text by remember { mutableStateOf("https://www.yahoo.co.jp/") }
-                        WebPageView2(url = "https://www.yahoo.co.jp/")
+                        //WebPageView2(url = "https://www.yahoo.co.jp/")
 //                        TextField(value = text, onValueChange = {
 //                                newText ->  text = newText
 //                        })
                     //}
+                    TabViewWeb()
                 }
             }
         }
@@ -126,3 +142,89 @@ fun WebPageView2Preview() {
         WebPageView2(url = "https://www.yahoo.co.jp/")
     }
 }
+
+// 参考サイト
+// https://proandroiddev.com/tabs-in-jetpack-compose-81b1496c97dc
+@Composable
+fun TabViewWeb1() {
+    var tabIndex by remember { mutableStateOf(0) }
+
+    val tabs = listOf("Home", "About", "Settings", "User", "Nice","Email", "Star", "Menu")
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        TabRow(selectedTabIndex = tabIndex) {
+            tabs.forEachIndexed { index, title ->
+                Tab(text = { Text(title) },
+                    selected = tabIndex == index,
+                    onClick = { tabIndex = index },
+                    icon = {
+                        when (index) {
+                            0 -> Icon(imageVector = Icons.Default.Home, contentDescription = null)
+                            1 -> Icon(imageVector = Icons.Default.Info, contentDescription = null)
+                            2 -> Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                            3 -> Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                            4 -> Icon(imageVector = Icons.Default.ThumbUp, contentDescription = null)
+                            5 -> Icon(imageVector = Icons.Default.Email, contentDescription = null)
+                            6 -> Icon(imageVector = Icons.Default.Star, contentDescription = null)
+                            7 -> Icon(imageVector = Icons.Default.Menu, contentDescription = null)
+                        }
+                    }
+                )
+            }
+        }
+        when (tabIndex) {
+            0 -> Text("Tab $tabIndex")
+            1 -> WebPageView2(url = "https://www.yahoo.co.jp/")
+            2 -> WebPageView2(url = "https://bing.com/")
+            3 -> WebPageView2(url = "https://bing.com/")
+        }
+    }
+}
+
+@Composable
+fun TabViewWeb() {
+    var tabIndex by remember { mutableStateOf(0) }
+
+    val tabs = listOf("Home", "About", "Settings", "User", "Nice","Email", "Star", "Menu")
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+
+
+        // ScrollableTabRow を使うと、スクロール可能なタブを作成します。タブが多くデザインが崩れてしまう場合はこちらを使いましょう。
+
+        ScrollableTabRow(selectedTabIndex = tabIndex) {
+            tabs.forEachIndexed { index, title ->
+                Tab(text = { Text(title) },
+                    selected = tabIndex == index,
+                    onClick = { tabIndex = index },
+                    icon = {
+                        when (index) {
+                            0 -> Icon(imageVector = Icons.Default.Home, contentDescription = null)
+                            1 -> Icon(imageVector = Icons.Default.Info, contentDescription = null)
+                            2 -> Icon(imageVector = Icons.Default.Settings, contentDescription = null)
+                            3 -> Icon(imageVector = Icons.Default.Person, contentDescription = null)
+                            4 -> Icon(imageVector = Icons.Default.ThumbUp, contentDescription = null)
+                            5 -> Icon(imageVector = Icons.Default.Email, contentDescription = null)
+                            6 -> Icon(imageVector = Icons.Default.Star, contentDescription = null)
+                            7 -> Icon(imageVector = Icons.Default.Menu, contentDescription = null)
+                        }
+                    }
+                )
+            }
+        }
+        when (tabIndex) {
+            0 -> Text("Tab $tabIndex")
+            1 -> WebPageView2(url = "https://www.yahoo.co.jp/")
+            2 -> WebPageView2(url = "https://bing.com/")
+            3 -> WebPageView2(url = "https://bing.com/")
+        }
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun TabViewWebPreview(){
+    TabViewWeb()
+}
+
