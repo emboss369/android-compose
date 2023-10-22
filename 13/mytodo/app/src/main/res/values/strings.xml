@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MyTodo</string>
+    <string name="back_button">Back</string>
+    <string name="item_entry_title">Todo追加</string>
+    <string name="no_item_description">Todoアイテムがないようです。\nTodo追加をタップして下さい。</string>
+    <string name="done">完了</string>
+    <string name="not_yet">未</string>
+    <string name="item_detail_title">Todo詳細</string>
+    <string name="edit_item_title">Todo編集</string>
+    <string name="todo">Todo</string>
+    <string name="description">詳細</string>
+    <string name="todo_name_req">Todo名称*</string>
+    <string name="todo_desc_req">Todo詳細*</string>
+    <string name="required_fields">*は必須入力です</string>
+    <string name="save_action">保存</string>
+</resources>

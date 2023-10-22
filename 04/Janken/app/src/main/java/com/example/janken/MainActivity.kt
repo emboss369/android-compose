@@ -181,7 +181,7 @@ fun PlayerViewPreview() {
 @Composable
 fun ComputerViewPreview() {
     JankenTheme {
-        ComputerView(1)
+        ComputerView(0)
     }
 }
 

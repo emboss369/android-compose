@@ -1,0 +1,702 @@
+[
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E6%9D%BE%E5%89%8D%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "松前公園",
+  "pref": "北海道",
+  "longitude": "41.430848",
+  "latitude": "140.10868"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E4%BA%8C%E5%8D%81%E9%96%93%E9%81%93%E8%B7%AF%E6%A1%9C%E4%B8%A6%E6%9C%A8&action=edit&redlink=1",
+  "name": "二十間道路桜並木",
+  "pref": "北海道",
+  "longitude": "42.386001",
+  "latitude": "142.422621"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%BC%98%E5%89%8D%E5%85%AC%E5%9C%92",
+  "name": "弘前公園",
+  "pref": "青森県",
+  "longitude": "40.608036",
+  "latitude": "140.463806"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%8A%A6%E9%87%8E%E6%B1%A0%E6%B2%BC%E7%BE%A4%E7%9C%8C%E7%AB%8B%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92",
+  "name": "芦野池沼群県立自然公園",
+  "pref": "青森県",
+  "longitude": "40.919167",
+  "latitude": "140.45"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%AB%98%E6%9D%BE%E5%85%AC%E5%9C%92",
+  "name": "高松公園",
+  "pref": "岩手県",
+  "longitude": "39.721159",
+  "latitude": "141.146626"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%8C%97%E4%B8%8A%E5%B8%82%E7%AB%8B%E5%85%AC%E5%9C%92%E5%B1%95%E5%8B%9D%E5%9C%B0",
+  "name": "北上市立公園展勝地",
+  "pref": "岩手県",
+  "longitude": "39.270711",
+  "latitude": "141.126485"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%88%B9%E5%B2%A1%E5%9F%8E",
+  "name": "船岡城",
+  "pref": "宮城県",
+  "longitude": "38.0535",
+  "latitude": "140.754944"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%8D%83%E7%A7%8B%E5%85%AC%E5%9C%92",
+  "name": "千秋公園",
+  "pref": "秋田県",
+  "longitude": "39.722222",
+  "latitude": "140.123889"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%9C%9F%E4%BA%BA%E5%85%AC%E5%9C%92",
+  "name": "真人公園",
+  "pref": "秋田県",
+  "longitude": "39.209722",
+  "latitude": "140.573056"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%A1%A7%E6%9C%A8%E5%86%85%E5%B7%9D#.E6.A1.A7.E6.9C.A8.E5.86.85.E5.B7.9D.E5.A0.A4",
+  "name": "桧木内川堤・角館武家屋敷",
+  "pref": "秋田県",
+  "longitude": "39.598915",
+  "latitude": "140.559511"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%B6%B4%E5%B2%A1%E5%85%AC%E5%9C%92",
+  "name": "鶴岡公園",
+  "pref": "山形県",
+  "longitude": "38.728539",
+  "latitude": "139.824225"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%83%8F%E5%B8%BD%E5%AD%90%E5%B1%B1%E5%85%AC%E5%9C%92",
+  "name": "烏帽子山公園",
+  "pref": "山形県",
+  "longitude": "38.051147",
+  "latitude": "140.166924"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%8B%A5%E6%9D%BE%E5%9F%8E",
+  "name": "若松城",
+  "pref": "福島県",
+  "longitude": "37.487717",
+  "latitude": "139.929786"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%BA%8C%E6%9C%AC%E6%9D%BE%E5%9F%8E",
+  "name": "二本松城",
+  "pref": "福島県",
+  "longitude": "37.6",
+  "latitude": "140.43"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%B8%89%E6%98%A5%E6%BB%9D%E6%A1%9C",
+  "name": "三春滝桜",
+  "pref": "福島県",
+  "longitude": "37.407694",
+  "latitude": "140.500061"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%97%A5%E7%AB%8B%E5%B8%82%E3%81%8B%E3%81%BF%E3%81%AD%E5%85%AC%E5%9C%92",
+  "name": "日立市かみね公園・平和通り",
+  "pref": "茨城県",
+  "longitude": "36.608944",
+  "latitude": "140.657333"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%9D%99%E5%B3%B0%E3%81%B5%E3%82%8B%E3%81%95%E3%81%A8%E5%85%AC%E5%9C%92",
+  "name": "静峰ふるさと公園",
+  "pref": "茨城県",
+  "longitude": "36.502826",
+  "latitude": "140.418636"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%97%A5%E5%85%89%E8%A1%97%E9%81%93",
+  "name": "日光街道桜並木",
+  "pref": "栃木県",
+  "longitude": "36.592596",
+  "latitude": "139.862188"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%AA%E5%B9%B3%E5%B1%B1%E7%9C%8C%E7%AB%8B%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92_%28%E6%A0%83%E6%9C%A8%E7%9C%8C%29",
+  "name": "太平山県立自然公園",
+  "pref": "栃木県",
+  "longitude": "36.359921",
+  "latitude": "139.697542"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E8%B5%A4%E5%9F%8E%E5%8D%97%E9%9D%A2%E5%8D%83%E6%9C%AC%E6%A1%9C&action=edit&redlink=1",
+  "name": "赤城南面千本桜",
+  "pref": "群馬県",
+  "longitude": "36.468072",
+  "latitude": "139.191815"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%A1%9C%E5%B1%B1_%28%E7%BE%A4%E9%A6%AC%E7%9C%8C%29",
+  "name": "桜山公園",
+  "pref": "群馬県",
+  "longitude": "36.161694",
+  "latitude": "139.021167"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%A7%E5%AE%AE%E5%85%AC%E5%9C%92",
+  "name": "大宮公園",
+  "pref": "埼玉県",
+  "longitude": "35.919022",
+  "latitude": "139.630819"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%86%8A%E8%B0%B7%E6%A1%9C%E5%A0%A4",
+  "name": "熊谷桜堤",
+  "pref": "埼玉県",
+  "longitude": "36.136211",
+  "latitude": "139.384618"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%95%B7%E7%80%9E",
+  "name": "長瀞",
+  "pref": "埼玉県",
+  "longitude": "36.095173",
+  "latitude": "139.112315"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E6%B3%89%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "泉自然公園",
+  "pref": "千葉県",
+  "longitude": "35.577507",
+  "latitude": "140.230648"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%B8%85%E6%B0%B4%E5%85%AC%E5%9C%92",
+  "name": "清水公園",
+  "pref": "千葉県",
+  "longitude": "35.959214",
+  "latitude": "139.860031"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E8%8C%82%E5%8E%9F%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "茂原公園",
+  "pref": "千葉県",
+  "longitude": "35.430705",
+  "latitude": "140.284485"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%96%B0%E5%AE%BF%E5%BE%A1%E8%8B%91",
+  "name": "新宿御苑",
+  "pref": "東京都",
+  "longitude": "35.685278",
+  "latitude": "139.709722"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%B8%8A%E9%87%8E%E6%81%A9%E8%B3%9C%E5%85%AC%E5%9C%92",
+  "name": "上野恩賜公園",
+  "pref": "東京都",
+  "longitude": "35.714082",
+  "latitude": "139.774076"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%9A%85%E7%94%B0%E5%85%AC%E5%9C%92",
+  "name": "隅田公園",
+  "pref": "東京都",
+  "longitude": "35.711835",
+  "latitude": "139.803416"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%BA%95%E3%81%AE%E9%A0%AD%E6%81%A9%E8%B3%9C%E5%85%AC%E5%9C%92",
+  "name": "井の頭恩賜公園",
+  "pref": "東京都",
+  "longitude": "35.700833",
+  "latitude": "139.574167"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B0%8F%E9%87%91%E4%BA%95%E5%85%AC%E5%9C%92",
+  "name": "小金井公園",
+  "pref": "東京都",
+  "longitude": "35.714444",
+  "latitude": "139.518889"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%A5%9E%E5%A5%88%E5%B7%9D%E7%9C%8C%E7%AB%8B%E4%B8%89%E3%83%84%E6%B1%A0%E5%85%AC%E5%9C%92",
+  "name": "神奈川県立三ツ池公園",
+  "pref": "神奈川県",
+  "longitude": "35.522889",
+  "latitude": "139.660306"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%A1%A3%E7%AC%A0%E5%B1%B1%E5%85%AC%E5%9C%92",
+  "name": "衣笠山公園",
+  "pref": "神奈川県",
+  "longitude": "35.248838",
+  "latitude": "139.657887"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B0%8F%E7%94%B0%E5%8E%9F%E5%9F%8E%E5%9D%80%E5%85%AC%E5%9C%92",
+  "name": "小田原城址公園",
+  "pref": "神奈川県",
+  "longitude": "35.249058",
+  "latitude": "139.156435"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%A7%E6%B2%B3%E6%B4%A5%E5%88%86%E6%B0%B4",
+  "name": "大河津分水",
+  "pref": "新潟県",
+  "longitude": "37.610346",
+  "latitude": "138.841505"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E6%9D%91%E6%9D%BE%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "村松公園",
+  "pref": "新潟県",
+  "longitude": "37.693661",
+  "latitude": "139.189383"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%AB%98%E7%94%B0%E5%85%AC%E5%9C%92_%28%E4%B8%8A%E8%B6%8A%E5%B8%82%29",
+  "name": "高田公園",
+  "pref": "新潟県",
+  "longitude": "37.109634",
+  "latitude": "138.256672"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%9D%BE%E5%B7%9D%E5%85%AC%E5%9C%92",
+  "name": "松川公園",
+  "pref": "富山県",
+  "longitude": "36.69493",
+  "latitude": "137.213416"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%AB%98%E5%B2%A1%E5%8F%A4%E5%9F%8E%E5%85%AC%E5%9C%92",
+  "name": "高岡城",
+  "pref": "富山県",
+  "longitude": "36.749167",
+  "latitude": "137.020556"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%85%BC%E5%85%AD%E5%9C%92",
+  "name": "兼六園",
+  "pref": "石川県",
+  "longitude": "36.562139",
+  "latitude": "136.6625"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%B6%B3%E7%BE%BD%E5%B7%9D%E6%A1%9C%E4%B8%A6%E6%9C%A8",
+  "name": "足羽川・足羽山公園",
+  "pref": "福井県",
+  "longitude": "36.063728",
+  "latitude": "136.21875"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%B8%B8%E5%B2%A1%E5%9F%8E",
+  "name": "霞ヶ城公園（坂井）",
+  "pref": "福井県",
+  "longitude": "36.152422",
+  "latitude": "136.272144"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%A7%E6%B3%95%E5%B8%AB%E5%85%AC%E5%9C%92",
+  "name": "大法師公園",
+  "pref": "山梨県",
+  "longitude": "35.545833",
+  "latitude": "138.455556"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%87%A5%E7%AB%9C%E5%85%AC%E5%9C%92",
+  "name": "臥竜公園",
+  "pref": "長野県",
+  "longitude": "36.64624",
+  "latitude": "138.312522"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B0%8F%E8%AB%B8%E5%9F%8E",
+  "name": "小諸城",
+  "pref": "長野県",
+  "longitude": "36.327336",
+  "latitude": "138.417247"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%AB%98%E9%81%A0%E5%9F%8E%E5%9D%80%E5%85%AC%E5%9C%92",
+  "name": "高遠城址公園",
+  "pref": "長野県",
+  "longitude": "35.833836",
+  "latitude": "138.0621"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%99%BE%E5%8D%81%E9%83%8E%E6%A1%9C",
+  "name": "新境川・百十郎桜",
+  "pref": "岐阜県",
+  "longitude": "35.398869",
+  "latitude": "136.848264"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%A0%B9%E5%B0%BE%E8%B0%B7%E3%83%BB%E6%B7%A1%E5%A2%A8%E5%85%AC%E5%9C%92",
+  "name": "根尾谷・淡墨公園",
+  "pref": "岐阜県",
+  "longitude": "35.63223",
+  "latitude": "136.608828"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%9C%9E%E9%96%93%E3%83%B6%E6%B8%93",
+  "name": "霞間ヶ渓",
+  "pref": "岐阜県",
+  "longitude": "35.430321",
+  "latitude": "136.547951"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E3%81%95%E3%81%8F%E3%82%89%E3%81%AE%E9%87%8C&action=edit&redlink=1",
+  "name": "さくらの里",
+  "pref": "静岡県",
+  "longitude": "34.90728",
+  "latitude": "139.090817"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%86%A8%E5%A3%AB%E9%9C%8A%E5%9C%92",
+  "name": "冨士霊園",
+  "pref": "静岡県",
+  "longitude": "35.367578",
+  "latitude": "138.908551"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B1%B1%E5%B4%8E%E5%B7%9D%E5%9B%9B%E5%AD%A3%E3%81%AE%E9%81%93",
+  "name": "山崎川四季の道",
+  "pref": "愛知県",
+  "longitude": "35.132663",
+  "latitude": "136.942563"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%B6%B4%E8%88%9E%E5%85%AC%E5%9C%92",
+  "name": "鶴舞公園",
+  "pref": "愛知県",
+  "longitude": "35.155667",
+  "latitude": "136.918472"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B2%A1%E5%B4%8E%E5%85%AC%E5%9C%92_%28%E5%B2%A1%E5%B4%8E%E5%B8%82%29",
+  "name": "岡崎公園",
+  "pref": "愛知県",
+  "longitude": "34.956295",
+  "latitude": "137.158792"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%BA%94%E6%9D%A1%E5%B7%9D",
+  "name": "五条川",
+  "pref": "愛知県",
+  "longitude": "35.279939",
+  "latitude": "136.877088"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E4%B8%89%E5%A4%9A%E6%B0%97&action=edit&redlink=1",
+  "name": "三多気",
+  "pref": "三重県",
+  "longitude": "34.517509",
+  "latitude": "136.222028"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E5%AE%AE%E5%B7%9D%E5%A0%A4&action=edit&redlink=1",
+  "name": "宮川堤",
+  "pref": "三重県",
+  "longitude": "34.49264",
+  "latitude": "136.685996"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E8%B1%8A%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "豊公園",
+  "pref": "滋賀県",
+  "longitude": "35.375023",
+  "latitude": "136.260596"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%B5%B7%E6%B4%A5%E5%A4%A7%E5%B4%8E",
+  "name": "海津大崎",
+  "pref": "滋賀県",
+  "longitude": "35.449653",
+  "latitude": "136.087613"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B5%90%E5%B1%B1",
+  "name": "嵐山",
+  "pref": "京都府",
+  "longitude": "35.010324",
+  "latitude": "135.681587"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%BB%81%E5%92%8C%E5%AF%BA",
+  "name": "御室桜",
+  "pref": "京都府",
+  "longitude": "35.030653",
+  "latitude": "135.714842"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%86%8D%E9%86%90%E5%AF%BA",
+  "name": "醍醐寺",
+  "pref": "京都府",
+  "longitude": "34.951024",
+  "latitude": "135.819563"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E7%AC%A0%E7%BD%AE%E5%B1%B1%E8%87%AA%E7%84%B6%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "笠置山自然公園",
+  "pref": "京都府",
+  "longitude": "34.754364",
+  "latitude": "135.941502"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%80%A0%E5%B9%A3%E5%B1%80_%28%E6%97%A5%E6%9C%AC%29",
+  "name": "造幣局",
+  "pref": "大阪府",
+  "longitude": "34.69668",
+  "latitude": "135.521055"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%A7%E9%98%AA%E5%9F%8E%E5%85%AC%E5%9C%92",
+  "name": "大阪城公園",
+  "pref": "大阪府",
+  "longitude": "34.685612",
+  "latitude": "135.528591"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%B8%87%E5%8D%9A%E8%A8%98%E5%BF%B5%E5%85%AC%E5%9C%92",
+  "name": "万博記念公園",
+  "pref": "大阪府",
+  "longitude": "34.806758",
+  "latitude": "135.530147"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A7%AB%E8%B7%AF%E5%9F%8E",
+  "name": "姫路城",
+  "pref": "兵庫県",
+  "longitude": "34.839366",
+  "latitude": "134.694024"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%98%8E%E7%9F%B3%E5%85%AC%E5%9C%92",
+  "name": "明石公園",
+  "pref": "兵庫県",
+  "longitude": "34.650545",
+  "latitude": "134.992143"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%99%E5%B7%9D%E5%85%AC%E5%9C%92",
+  "name": "夙川公園・夙川河川敷緑地",
+  "pref": "兵庫県",
+  "longitude": "34.643107",
+  "latitude": "134.997179"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A5%88%E8%89%AF%E5%85%AC%E5%9C%92",
+  "name": "奈良公園",
+  "pref": "奈良県",
+  "longitude": "34.681418",
+  "latitude": "135.837659"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%83%A1%E5%B1%B1%E5%9F%8E_%28%E5%A4%A7%E5%92%8C%E5%9B%BD%29",
+  "name": "郡山城",
+  "pref": "奈良県",
+  "longitude": "34.502369",
+  "latitude": "135.623269"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%90%89%E9%87%8E%E5%B1%B1",
+  "name": "吉野山",
+  "pref": "奈良県",
+  "longitude": "34.372696",
+  "latitude": "135.855461"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%B4%80%E4%B8%89%E4%BA%95%E5%AF%BA",
+  "name": "紀三井寺",
+  "pref": "和歌山県",
+  "longitude": "34.188209",
+  "latitude": "135.187616"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%A0%B9%E6%9D%A5%E5%AF%BA",
+  "name": "根来寺",
+  "pref": "和歌山県",
+  "longitude": "34.28715",
+  "latitude": "135.316658"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%B8%83%E5%B7%9D%E3%83%80%E3%83%A0",
+  "name": "七川ダム湖畔",
+  "pref": "和歌山県",
+  "longitude": "33.595974",
+  "latitude": "135.69743"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E4%B9%85%E6%9D%BE%E5%85%AC%E5%9C%92",
+  "name": "久松公園",
+  "pref": "鳥取県",
+  "longitude": "35.51",
+  "latitude": "134.24"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%89%93%E5%90%B9%E5%85%AC%E5%9C%92",
+  "name": "打吹公園",
+  "pref": "鳥取県",
+  "longitude": "35.430996",
+  "latitude": "133.821839"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%9D%BE%E6%B1%9F%E5%9F%8E",
+  "name": "松江城",
+  "pref": "島根県",
+  "longitude": "35.475067",
+  "latitude": "133.050725"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%96%90%E4%BC%8A%E5%B7%9D%E5%A0%A4%E9%98%B2%E6%A1%9C%E4%B8%A6%E6%9C%A8",
+  "name": "斐伊川堤防桜並木",
+  "pref": "島根県",
+  "longitude": "35.290828",
+  "latitude": "132.898267"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E6%B4%A5%E5%B1%B1%E5%9F%8E",
+  "name": "津山城",
+  "pref": "岡山県",
+  "longitude": "35.062588",
+  "latitude": "134.001724"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%8D%83%E5%85%89%E5%AF%BA%E5%85%AC%E5%9C%92",
+  "name": "千光寺公園",
+  "pref": "広島県",
+  "longitude": "34.411598",
+  "latitude": "133.19562"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%BA%84%E5%8E%9F%E4%B8%8A%E9%87%8E%E5%85%AC%E5%9C%92",
+  "name": "庄原上野公園",
+  "pref": "広島県",
+  "longitude": "34.857943",
+  "latitude": "133.023002"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B8%B8%E7%9B%A4%E5%85%AC%E5%9C%92",
+  "name": "ときわ公園",
+  "pref": "山口県",
+  "longitude": "33.945789",
+  "latitude": "131.283112"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E9%8C%A6%E5%B8%AF%E6%A9%8B",
+  "name": "吉香公園・錦帯橋",
+  "pref": "山口県",
+  "longitude": "34.167596",
+  "latitude": "132.178411"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%A5%BF%E9%83%A8%E5%85%AC%E5%9C%92",
+  "name": "西部公園",
+  "pref": "徳島県",
+  "longitude": "34.068828",
+  "latitude": "134.514692"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%90%B4%E5%BC%BE%E5%85%AC%E5%9C%92",
+  "name": "琴弾公園",
+  "pref": "香川県",
+  "longitude": "34.13356",
+  "latitude": "133.642226"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%9F%8E%E5%B1%B1%E5%85%AC%E5%9C%92_%28%E6%9D%BE%E5%B1%B1%E5%B8%82%29",
+  "name": "城山公園",
+  "pref": "愛媛県",
+  "longitude": "33.844752",
+  "latitude": "132.765373"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E9%8F%A1%E9%87%8E%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "鏡野公園",
+  "pref": "高知県",
+  "longitude": "33.618745",
+  "latitude": "133.719057"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E7%89%A7%E9%87%8E%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "牧野公園",
+  "pref": "高知県",
+  "longitude": "33.5",
+  "latitude": "133.28"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E8%A5%BF%E5%85%AC%E5%9C%92_%28%E7%A6%8F%E5%B2%A1%E5%B8%82%29",
+  "name": "西公園",
+  "pref": "福岡県",
+  "longitude": "33.59534",
+  "latitude": "130.377131"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E5%B0%8F%E5%9F%8E%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "小城公園",
+  "pref": "佐賀県",
+  "longitude": "33.289149",
+  "latitude": "130.196684"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%A4%A7%E6%9D%91%E5%85%AC%E5%9C%92",
+  "name": "大村公園",
+  "pref": "長崎県",
+  "longitude": "32.89765",
+  "latitude": "129.956682"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E7%86%8A%E6%9C%AC%E5%9F%8E",
+  "name": "熊本城",
+  "pref": "熊本県",
+  "longitude": "32.806032",
+  "latitude": "130.705765"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E6%B0%B4%E4%BF%A3%E5%B8%82%E3%83%81%E3%82%A7%E3%83%AA%E3%83%BC%E3%83%A9%E3%82%A4%E3%83%B3&action=edit&redlink=1",
+  "name": "水俣市チェリーライン",
+  "pref": "熊本県",
+  "longitude": "32.23252",
+  "latitude": "130.415521"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E5%B8%82%E6%88%BF%E3%83%80%E3%83%A0&action=edit&redlink=1",
+  "name": "市房ダム湖畔",
+  "pref": "熊本県",
+  "longitude": "32.320048",
+  "latitude": "131.030546"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%B2%A1%E5%9F%8E_%28%E8%B1%8A%E5%BE%8C%E5%9B%BD%29",
+  "name": "岡城公園",
+  "pref": "大分県",
+  "longitude": "32.966182",
+  "latitude": "131.402413"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E6%AF%8D%E6%99%BA%E4%B8%98%E9%96%A2%E4%B9%8B%E5%B0%BE%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "母智丘関之尾公園",
+  "pref": "宮崎県",
+  "longitude": "31.762149",
+  "latitude": "130.986112"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/w\/index.php?title=%E5%BF%A0%E5%85%83%E5%85%AC%E5%9C%92&action=edit&redlink=1",
+  "name": "忠元公園",
+  "pref": "鹿児島県",
+  "longitude": "32.048679",
+  "latitude": "130.615054"
+ },
+ {
+  "wiki": "http:\/\/ja.wikipedia.org\/wiki\/%E5%90%8D%E8%AD%B7%E5%9F%8E",
+  "name": "名護城公園",
+  "pref": "沖縄県",
+  "longitude": "26.590654",
+  "latitude": "127.995513"
+ }
+]
