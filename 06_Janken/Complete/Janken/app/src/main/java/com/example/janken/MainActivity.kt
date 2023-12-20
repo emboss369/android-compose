@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlin.random.Random
 
 class MainActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,21 +109,21 @@ fun Content() {
     Row {
       Button(onClick = {
         myHand = 0
-        comHand = Random.nextInt(3)
+        comHand = (0..2).random()
         result = (comHand - myHand + 3) % 3
       }) {
         Text("グー")
       }
       Button(onClick = {
         myHand = 1
-        comHand = Random.nextInt(3)
+        comHand = (0..2).random()
         result = (comHand - myHand + 3) % 3
       }) {
         Text("チョキ")
       }
       Button(onClick = {
         myHand = 2
-        comHand = Random.nextInt(3)
+        comHand = (0..2).random()
         result = (comHand - myHand + 3) % 3
       }) {
         Text("パー")
