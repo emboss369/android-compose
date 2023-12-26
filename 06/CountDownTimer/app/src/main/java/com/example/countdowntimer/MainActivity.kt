@@ -7,10 +7,22 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.DrawerValue
+import androidx.compose.material.FabPosition
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Stop
 import androidx.compose.material.icons.filled.Timer
+import androidx.compose.material.rememberDrawerState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -23,6 +35,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.countdowntimer.ui.theme.CountDownTimerTheme
 import kotlinx.coroutines.launch
@@ -87,6 +100,14 @@ fun ScaffoldDemo(viewModel: ExampleViewModel = viewModel()) {
 
     val uiState = viewModel.uiState
 
+    fun toggleTimer(millisInFuture: Long) {
+        if (uiState.isRunning) {
+            viewModel.stopTimer()
+        } else {
+            viewModel.startTimer(millisInFuture)
+        }
+    }
+
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = { TopBar(background = materialBlue700,
@@ -101,13 +122,10 @@ fun ScaffoldDemo(viewModel: ExampleViewModel = viewModel()) {
             }
         )  },
         floatingActionButtonPosition = FabPosition.Center,
-        floatingActionButton = { FloatingActionButton(onClick = {
-            if (uiState.isRunning) {
-                viewModel.stopTimer()
-            } else {
-                viewModel.startTimer(1 * 60 * 1000)
-            }
-        }){
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { toggleTimer(3 * 60 * 1000) }
+            ){
             if (uiState.isRunning) {
                 Icon(Icons.Filled.Stop, contentDescription = "停止")
             } else {
@@ -125,10 +143,11 @@ fun ScaffoldDemo(viewModel: ExampleViewModel = viewModel()) {
                 contentAlignment = Alignment.Center
             ){
                 Arc(color = Color.Green,
-                    timeLeft = uiState.timeLeft
+                    timeLeft = uiState.timeLeft.toFloat() / uiState.time.toFloat()
                     )
-                Text("%1d:%2$02d".format(uiState.minute,
-                    uiState.second))
+                val minute = uiState.timeLeft / 1000L / 60L
+                val second = uiState.timeLeft / 1000L % 60L
+                Text("%1d:%2$02d".format(minute, second), fontSize = 90.sp)
         }
                   },
         bottomBar = { BottomAppBar(backgroundColor = materialBlue700) { Text("BottomAppBar") } }
@@ -141,8 +160,8 @@ fun Arc(color: Color, timeLeft: Float) {
             .fillMaxSize()
     ) {
         // https://developer.android.com/reference/kotlin/androidx/compose/ui/graphics/drawscope/DrawScope#drawArc(androidx.compose.ui.graphics.Brush,kotlin.Float,kotlin.Float,kotlin.Boolean,androidx.compose.ui.geometry.Offset,androidx.compose.ui.geometry.Size,kotlin.Float,androidx.compose.ui.graphics.drawscope.DrawStyle,androidx.compose.ui.graphics.ColorFilter,androidx.compose.ui.graphics.BlendMode)
-        val strokeWidht = 30.0f
-        val minSize = min(size.width, size.height) - strokeWidht * 4
+        val strokeWidth = 30.0f
+        val minSize = min(size.width, size.height) - strokeWidth * 4
         val maxSize = max(size.width, size.height)
         var offset: Offset
 
@@ -150,7 +169,7 @@ fun Arc(color: Color, timeLeft: Float) {
 
 
         if (size.width < size.height) {
-            offset = Offset(strokeWidht * 2, (maxSize - minSize) / 2.0f )
+            offset = Offset(strokeWidth * 2, (maxSize - minSize) / 2.0f )
         } else {
             offset = Offset((maxSize - minSize) / 2.0f, 0.0f )
         }
@@ -162,7 +181,7 @@ fun Arc(color: Color, timeLeft: Float) {
             useCenter = false,
             size = Size(minSize, minSize),
             topLeft = offset,
-            style = Stroke(width = 40.dp.toPx(), cap = StrokeCap.Round)
+            style = Stroke(width = 10.dp.toPx(), cap = StrokeCap.Round)
         )
     }
 }

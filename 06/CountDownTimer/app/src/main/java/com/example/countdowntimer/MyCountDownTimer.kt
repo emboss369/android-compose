@@ -10,11 +10,17 @@ import androidx.lifecycle.ViewModel
 // https://developer.android.com/jetpack/compose/state?hl=ja#viewmodels-source-of-truth
 // を参考に、ViewModel作成する。
 
+// State class for the UI of the Example screen (ExampleActivity)
+// このクラスは、UIの状態を保持するクラスです。
+// このクラスのインスタンスをViewModelに保持させることで、
+// ViewModelがUIの状態を保持することができます。
+// このクラスは、UIの状態を保持するためのものなので、
+// このクラスのインスタンスを変更すると、UIに反映されます。
 data class ExampleUiState(
-    var minute: Long = 3,   // varで変更して、Stateの変更はUIに反映されるのか？それとも反映されないのか？
-    var second: Long = 0,
+    var time: Long = 3 * 60 * 1000,
+    var timeLeft: Long = 3 * 60 * 1000,
     var isRunning: Boolean = false,
-    var timeLeft: Float = 1.0f // 円グラフ用、残り時間の割合です
+
 )
 
 class MyCountDownTimer(
@@ -44,11 +50,11 @@ class ExampleViewModel() : ViewModel() {
         private set // setterをprivateにして外部から使用できなく
 
     var timer: MyCountDownTimer? = null
-    var time: Long = 0 // セットしたタイマー時間（ミリ秒）
+    //var time: Long = 0 // セットしたタイマー時間（ミリ秒）
 
     // Business logic
     fun startTimer(millisInFuture: Long) {
-        time = millisInFuture
+        uiState.time = millisInFuture
         Log.d("ExampleViewModel","startTimer")
         uiState.isRunning = true
 //        uiState = uiState.copy().apply {
@@ -59,10 +65,10 @@ class ExampleViewModel() : ViewModel() {
             countDownInterval = 100,
             changed = { millisUntilFinished ->
                 uiState = ExampleUiState(
-                    minute = millisUntilFinished / 1000L / 60L,
-                    second = millisUntilFinished / 1000L % 60L,
+                    time = millisInFuture,
+                    timeLeft = millisUntilFinished,
                     isRunning = true,
-                    timeLeft = millisUntilFinished.toFloat() / time.toFloat()
+
                 // https://qiita.com/mimimi-no-sesese/items/2f9f64333c3339453430
                 // Long（整数）の除算はLong（整数）になります。今回は0.0〜1.0の少数（パーセンテージ）でほしいので
                     // .toFloat()して少数になるようにしましょう。
@@ -70,10 +76,9 @@ class ExampleViewModel() : ViewModel() {
             },
             finished = {
                 uiState = ExampleUiState(
-                    minute = 0,
-                    second = 0,
-                    isRunning = false,
-                    timeLeft = 0f
+                    time = millisInFuture,
+                    timeLeft = 0,
+                    isRunning = false
                 )
             }
         )
@@ -85,10 +90,9 @@ class ExampleViewModel() : ViewModel() {
         Log.d("ExampleViewModel","stopTimer")
         timer?.cancel()
         uiState = ExampleUiState(
-            minute = time / 1000L / 60L,
-            second = time / 1000L % 60L,
-            isRunning = false,
-            timeLeft = 1f
+            time = uiState.time,
+            timeLeft = 0,
+            isRunning = false
         )
     }
 }
