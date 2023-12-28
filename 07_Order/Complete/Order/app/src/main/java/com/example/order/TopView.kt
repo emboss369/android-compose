@@ -30,49 +30,31 @@ import com.example.order.ui.theme.OrderTheme
 
 @Composable
 fun TopView(onTapButton: () -> Unit) {
-  // https://developer.android.com/reference/kotlin/androidx/compose/foundation/package-summary?hl=ja#Image(androidx.compose.ui.graphics.painter.Painter,kotlin.String,androidx.compose.ui.Modifier,androidx.compose.ui.Alignment,androidx.compose.ui.layout.ContentScale,kotlin.Float,androidx.compose.ui.graphics.ColorFilter)
-
   Column(
     modifier = Modifier.background(Color.Yellow),
-    // こっちはなぜかアライメント（整列）
-    horizontalAlignment = Alignment.CenterHorizontally, // 横方向
-    // こっちはなぜかアレンジメント（配置）紛らわしい！！！
-    //verticalArrangement = Arrangement.Center // 縦方向
-    verticalArrangement = Arrangement.SpaceEvenly // 空白を均等に
+    horizontalAlignment = Alignment.CenterHorizontally,
+    verticalArrangement = Arrangement.SpaceEvenly
   ) {
-
-
-
-    // https://developer.android.com/jetpack/compose/text?hl=ja
     Box(contentAlignment = Alignment.Center) {
-
       Image(
         painter = painterResource(id = R.drawable.hamburger),
         contentDescription = "hamburger"
       )
       Text(
-        // text = "Colbar's burger",
         text = buildAnnotatedString {
           withStyle(style = SpanStyle(color = Color.Red)) {
             append("Colbar's")
           }
           append(" burger ")
         },
-        // Modifierそれぞれのコンポーザブルを修飾する、もしくは拡張するときに利用する。
         modifier = Modifier
           .background(color = Color.Transparent)
           .width(300.dp),
-        // テキストの色
         color = Color.Blue,
-        // 文字サイズを変更する
         fontSize = 80.sp,
-        // テキストを斜体にする
         fontStyle = FontStyle.Italic,
-        // テキストを太字にする
         fontWeight = FontWeight.Bold,
-        // テキストの配置
         textAlign = TextAlign.Center,
-        // テキストのスタタイル
         style = TextStyle(
           shadow = Shadow(
             color = Color.White,
@@ -83,7 +65,6 @@ fun TopView(onTapButton: () -> Unit) {
         // フォントの変更（Serif、Sans Serif、Monospace、Cursive ）
         fontFamily = FontFamily.SansSerif
       )
-
     }
     Button(onClick = {
       // 状態ホイスティング
@@ -93,31 +74,30 @@ fun TopView(onTapButton: () -> Unit) {
     }
   }
 }
-@Preview(widthDp = 360, heightDp = 640, showBackground = true)
-@Composable
-fun TopViewFirstPreview() {
-  OrderTheme{
-    Column(
-      modifier = Modifier.background(Color.Yellow),
-      horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.SpaceEvenly
-    ){
-      Box{
-        // Image()
-        Text(
-          text = "Colbar's burger",
-          modifier = Modifier
-            .background(color = Color.Red)
-            .width(300.dp)
-        )
-      }
-      Button(onClick = { /*TODO*/ }) {
-        Text("注文へ")
-      }
-    }
-  }
-
-}
+//@Preview(widthDp = 360, heightDp = 640, showBackground = true)
+//@Composable
+//fun TopViewFirstPreview() {
+//  OrderTheme{
+//    Column(
+//      modifier = Modifier.background(Color.Yellow),
+//      horizontalAlignment = Alignment.CenterHorizontally,
+//      verticalArrangement = Arrangement.SpaceEvenly
+//    ){
+//      Box{
+//        // Image()
+//        Text(
+//          text = "Colbar's burger",
+//          modifier = Modifier
+//            .background(color = Color.Red)
+//            .width(300.dp)
+//        )
+//      }
+//      Button(onClick = { /*TODO*/ }) {
+//        Text("注文へ")
+//      }
+//    }
+//  }
+//}
 @Preview(widthDp = 360, heightDp = 640, showBackground = true)
 @Composable
 fun TopViewPreview() {
