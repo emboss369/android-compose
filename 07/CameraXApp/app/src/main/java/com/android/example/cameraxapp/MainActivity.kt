@@ -40,7 +40,6 @@ import java.util.Locale
 
 typealias LumaListener = (luma: Double) -> Unit
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityMainBinding
 
@@ -125,9 +124,6 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
 
-
-
-
                     // インテントで共有してみる。
                     Intent(Intent.ACTION_SEND).also { share ->
                         share.type = "image/*"
@@ -146,52 +142,51 @@ class MainActivity : AppCompatActivity() {
     private fun startCamera() {
         // ProcessCameraProviderインスタンスを作成します
         // これは、カメラのライフサイクルをライフサイクル所有者にバインドするために使用されます。CameraX はライフサイクルを認識しているため、カメラを開閉するタスクが不要になります。
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+    val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
-        // cameraProviderFutureにリスナーを追加します
-        // 第1引数にRunnableを追加します。
-        // 第2引数にContextCompat.getMainExecutor()を追加する。これは、メインスレッドで実行されるExecutorを返します。
-        //
-        cameraProviderFuture.addListener({
-            // カメラのライフサイクルをライフサイクルオーナにバインドするために使用します。
-            // ProcessCameraProviderインスタンスを作成します
-            // Runnableの中に、ProcessCameraProviderを追加します。これは、カメラのライフサイクルをアプリケーションの
-            // プロセス内のLifecycleOwnerにバインドするために使用されます。
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+    // cameraProviderFutureにリスナーを追加します
+    // 第1引数にRunnableを追加します。
+    // 第2引数にContextCompat.getMainExecutor()を追加する。これは、メインスレッドで実行されるExecutorを返します。
+    //
+    cameraProviderFuture.addListener({
+        // カメラのライフサイクルをライフサイクルオーナにバインドするために使用します。
+        // ProcessCameraProviderインスタンスを作成します
+        // Runnableの中に、ProcessCameraProviderを追加します。これは、カメラのライフサイクルをアプリケーションの
+        // プロセス内のLifecycleOwnerにバインドするために使用されます。
+        val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
-            // Preview
-            // プレビューオブジェクトを初期化し、ビルドを呼び出し、ビューファインダーから表面プロバイダを取得し、それをプレビューに設定します。
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider)
-                }
-
-            imageCapture = ImageCapture.Builder()
-                .build()
-
-
-            // バックカメラをデフォルトで選択
-            // CameraSelectorオブジェクトを作成し、DEFAULT_BACK_CAMERAを選択します。
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            // try ブロックを作成します。そのブロックの中で、cameraProvider に何もバインドされていないことを確認し、
-            // 次に cameraSelector と preview オブジェクトを cameraProvider にバインドしてください。
-            try {
-                // ユースケースのバインドを解除してから再バインドする
-                cameraProvider.unbindAll()
-
-                // ユースケースをカメラにバインドする
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture)
-
-            } catch(exc: Exception) {
-                // このコードには、アプリにフォーカスがなくなった場合など、いくつかの失敗の可能性があります。
-                // このコードをcatchブロックでラップして、失敗した場合にログを記録します。
-                Log.e(TAG, "Use case binding failed", exc)
+        // Preview
+        // プレビューオブジェクトを初期化し、ビルドを呼び出し、ビューファインダーから表面プロバイダを取得し、それをプレビューに設定します。
+        val preview = Preview.Builder()
+            .build()
+            .also {
+                it.setSurfaceProvider(viewBinding.viewFinder.surfaceProvider)
             }
 
-        }, ContextCompat.getMainExecutor(this))
+        imageCapture = ImageCapture.Builder()
+            .build()
+
+        // バックカメラをデフォルトで選択
+        // CameraSelectorオブジェクトを作成し、DEFAULT_BACK_CAMERAを選択します。
+        val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+        // try ブロックを作成します。そのブロックの中で、cameraProvider に何もバインドされていないことを確認し、
+        // 次に cameraSelector と preview オブジェクトを cameraProvider にバインドしてください。
+        try {
+            // ユースケースのバインドを解除してから再バインドする
+            cameraProvider.unbindAll()
+
+            // ユースケースをカメラにバインドする
+            cameraProvider.bindToLifecycle(
+                this, cameraSelector, preview, imageCapture)
+
+        } catch(exc: Exception) {
+            // このコードには、アプリにフォーカスがなくなった場合など、いくつかの失敗の可能性があります。
+            // このコードをcatchブロックでラップして、失敗した場合にログを記録します。
+            Log.e(TAG, "Use case binding failed", exc)
+        }
+
+    }, ContextCompat.getMainExecutor(this))
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
