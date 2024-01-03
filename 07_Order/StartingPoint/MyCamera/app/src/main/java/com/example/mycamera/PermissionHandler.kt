@@ -1,7 +1,8 @@
-package com.android.example.mycamera
+package com.example.mycamera
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
@@ -14,25 +15,21 @@ fun PermissionHandler(onGranted: (Boolean) -> Unit) {
   val launcher = rememberLauncherForActivityResult(
     ActivityResultContracts.RequestPermission()
   ) { granted ->
+    Log.d("RequestPermission", "granted: $granted")
     onGranted(granted)
   }
+
   val context = LocalContext.current
   if (ContextCompat.checkSelfPermission(
       context,
       Manifest.permission.CAMERA
     ) == PackageManager.PERMISSION_GRANTED
   ) {
-    // もう権限持ってる
+    Log.d("RequestPermission", "already granted")
     onGranted(true)
   } else {
-    // https://stackoverflow.com/a/68331596/2520998
-
-    // SideEffect: Compose の状態を非 Compose コードに公開する
-    // 再コンポジションが成功するたびに呼び出される SideEffect コンポーザブルを使用します。
     SideEffect {
-      // 権限持てないので、ActivityResultContracts
-      // .RequestPermission()
-      // で権限を要求、要求する権限は、Manifestに記載されているもの
+      Log.d("RequestPermission", "request permission")
       launcher.launch(Manifest.permission.CAMERA)
     }
   }
