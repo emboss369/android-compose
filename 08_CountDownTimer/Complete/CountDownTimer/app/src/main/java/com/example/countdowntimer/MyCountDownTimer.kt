@@ -1,7 +1,6 @@
 package com.example.countdowntimer
 
 import android.os.CountDownTimer
-import android.util.Log
 
 // ## MyCountDownTimer クラスの変数:
 // - millisInFuture: タイマーの総時間をミリ秒単位で指定します。これはタイマーの初期設定時に受け取ります。
