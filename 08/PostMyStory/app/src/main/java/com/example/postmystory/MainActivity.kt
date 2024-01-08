@@ -43,22 +43,22 @@ class MainActivity : ComponentActivity() {
             val messages = remember {
                 mutableStateListOf(
                     Message(
-                        "伊賀百貨店は、今月3月25日に大阪市内にオープンしたばかりの新しいお店です。".repeat(5),
+                        ("この鉄橋は、昔の人々の技術と努力の結晶です。長い年月を経てなおしっかりと立っています。").repeat(5),
                         "https://picsum.photos/seed/1/200",
                         11
                     ),
                     Message(
-                        "お店は、とてもカラフルできれいで、なかなか良い感じです。".repeat(5),
+                        ("デジタルとアナログの両方を使って仕事をする人の気持ちを表現しています。").repeat(5),
                         "https://picsum.photos/seed/2/200",
                         250
                     ),
                     Message(
-                        "服装を見るのはとても興味深いです。設備はとても充実しています。".repeat(5),
+                        "私は、この場所で心身ともに癒されました。".repeat(5),
                         "https://picsum.photos/seed/3/200",
                         0
                     ),
                     Message(
-                        "友人と過ごすのに良い場所だし、店の前で働くのも楽しいです。".repeat(5),
+                        "先日、友人と一緒にいちご狩りに行ってきました。".repeat(5),
                         "https://picsum.photos/seed/4/200",
                         462
                     )
@@ -227,6 +227,17 @@ fun StickyHeaderPreview() {
     }
 }
 
+/**
+ * 画像をタップしたときに、画像のURLを返す。
+ *
+ * @param photo 画像のURL
+ * @param onClick タップ時の処理
+ *
+ * AsyncImageを使い、画像を表示します。
+ * modelには、ImageRequest.Builderを使い、画像のURLを指定し、crossfadeを有効にし、ディスクキャッシュ機能を無効にします。
+ * placeholderには、画像が読み込まれるまで表示する画像としてnow_loading.pngを指定します。
+ * contentScaleには、画像の表示方法を指定します。FillWidthを指定すると、画像の幅を領域いっぱいに表示します。
+ */
 @Composable
 fun PhotoItem(photo: String, onClick: (String) -> Unit) {
     // coil
@@ -463,4 +474,18 @@ fun CaptionView(onClick:() -> Unit, onChange: (String) -> Unit) {
 @Composable
 fun CaptionViewPreview() {
     CaptionView(onClick = {}, onChange = {})
+}
+
+@Composable
+fun CoilTest() {
+    AsyncImage(
+        model = "https://developer.android.com/static/images/brand/Android_Robot.png",
+        contentDescription = null,
+    )
+}
+
+@Preview
+@Composable
+fun CoilTestPreview() {
+    CoilTest()
 }
