@@ -30,7 +30,6 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.transform.RoundedCornersTransformation
-import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     enum class Scene {
@@ -40,30 +39,32 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            val messages = remember {
-                mutableStateListOf(
-                    Message(
-                        ("この鉄橋は、昔の人々の技術と努力の結晶です。長い年月を経てなおしっかりと立っています。").repeat(5),
-                        "https://picsum.photos/seed/1/200",
-                        11
-                    ),
-                    Message(
-                        ("デジタルとアナログの両方を使って仕事をする人の気持ちを表現しています。").repeat(5),
-                        "https://picsum.photos/seed/2/200",
-                        250
-                    ),
-                    Message(
-                        "私は、この場所で心身ともに癒されました。".repeat(5),
-                        "https://picsum.photos/seed/3/200",
-                        0
-                    ),
-                    Message(
-                        "先日、友人と一緒にいちご狩りに行ってきました。".repeat(5),
-                        "https://picsum.photos/seed/4/200",
-                        462
-                    )
-                )
-            }
+//            val messages = remember {
+//                mutableStateListOf(
+//                    Message(
+//                        "この鉄橋は、昔の人々の技術と努力の結晶です。長い年月を経てなおしっかりと立っています。".repeat(5),
+//                        "https://picsum.photos/seed/1/200",
+//                        11
+//                    )
+//                    ,
+//                    Message(
+//                        "デジタルとアナログの両方を使って仕事をする人の気持ちを表現しています。".repeat(5),
+//                        "https://picsum.photos/seed/2/200",
+//                        250
+//                    ),
+//                    Message(
+//                        "私は、この場所で心身ともに癒されました。".repeat(5),
+//                        "https://picsum.photos/seed/3/200",
+//                        0
+//                    ),
+//                    Message(
+//                        "先日、友人と一緒にいちご狩りに行ってきました。".repeat(5),
+//                        "https://picsum.photos/seed/4/200",
+//                        462
+//                    )
+//                )
+//            }
+            val messages = remember { mutableStateListOf<Message>() }
             var scene by remember{mutableStateOf(Scene.LIST)}
             var selectUrl by remember{ mutableStateOf("") }
             var caption by remember{ mutableStateOf("") }
@@ -81,11 +82,11 @@ class MainActivity : ComponentActivity() {
                             selectUrl  = ""
                             caption = ""
                         }
-                        Scene.PHOTOS -> PhotoGrid(){ url ->
+                        Scene.PHOTOS -> PhotoGridScreen(){ url ->
                             scene = Scene.CAPTION
                             selectUrl = url
                         }
-                        Scene.CAPTION -> CaptionView(
+                        Scene.CAPTION -> CaptionScreen(
                             onClick = {
                                       messages.add(0,
                                           Message(
@@ -266,7 +267,7 @@ fun PhotoItemPreview() {
 
 
 @Composable
-fun PhotoGrid(onClick: (String) -> Unit) {
+fun PhotoGridScreen(onClick: (String) -> Unit) {
     val photos = mutableListOf<String>().apply {
         for(i in 1..24) {
             add("https://picsum.photos/seed/${i}/200")
@@ -284,7 +285,7 @@ fun PhotoGrid(onClick: (String) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun PhotoGridPreview() {
-    PhotoGrid(){}
+    PhotoGridScreen(){}
 }
 
 
@@ -358,6 +359,7 @@ fun ArticleView(message: Message) {
 
         AsyncImage(
             modifier = Modifier
+                .aspectRatio(1f)
                 .padding(16.dp)
                 .fillMaxWidth(),
             model = ImageRequest.Builder(LocalContext.current)
@@ -412,22 +414,22 @@ fun ArticleViewPreview() {
 fun ListScreenPreview() {
     val messages = mutableListOf(
         Message(
-            "伊賀百貨店は、今月3月25日に大阪市内にオープンしたばかりの新しいお店です。".repeat(5),
+            "この鉄橋は、昔の人々の技術と努力の結晶です。長い年月を経てなおしっかりと立っています。".repeat(5),
             "https://picsum.photos/seed/1/200",
             11
         ),
         Message(
-            "お店は、とてもカラフルできれいで、なかなか良い感じです。".repeat(5),
+            "デジタルとアナログの両方を使って仕事をする人の気持ちを表現しています。".repeat(5),
             "https://picsum.photos/seed/2/200",
             250
         ),
         Message(
-            "服装を見るのはとても興味深いです。設備はとても充実しています。".repeat(5),
+            "私は、この場所で心身ともに癒されました。".repeat(5),
             "https://picsum.photos/seed/3/200",
             0
         ),
         Message(
-            "友達と遊ぶのにいい場所だと思ったし、店の前で働くのも楽しかった。".repeat(5),
+            "先日、友人と一緒にいちご狩りに行ってきました。".repeat(5),
             "https://picsum.photos/seed/4/200",
             462
         )
@@ -452,7 +454,7 @@ fun ArticleList(messages: MutableList<Message>) {
 
 
 @Composable
-fun CaptionView(onClick:() -> Unit, onChange: (String) -> Unit) {
+fun CaptionScreen(onClick:() -> Unit, onChange: (String) -> Unit) {
     var text by remember { mutableStateOf("") }
     Column() {
         TextField(
@@ -460,7 +462,7 @@ fun CaptionView(onClick:() -> Unit, onChange: (String) -> Unit) {
             onValueChange = { newText ->
                 text = newText
                 onChange(text) },
-            label = { Text("キャプションを書く") }
+            label = { Text("キャプションを入力してください") }
         )
         Button(onClick = {
             onClick()
@@ -473,7 +475,7 @@ fun CaptionView(onClick:() -> Unit, onChange: (String) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun CaptionViewPreview() {
-    CaptionView(onClick = {}, onChange = {})
+    CaptionScreen(onClick = {}, onChange = {})
 }
 
 @Composable
