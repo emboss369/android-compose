@@ -53,23 +53,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-  Text(
-    text = "Hello $name!",
-    modifier = modifier
-  )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-  CountDownTimerTheme {
-    Greeting("Android")
-  }
-}
-
-
-@Composable
 fun ExampleScaffold(viewModel: ExampleViewModel = viewModel()) {
   val uiState = viewModel.uiState
 
@@ -85,7 +68,6 @@ fun ExampleScaffold(viewModel: ExampleViewModel = viewModel()) {
   Scaffold(
     topBar = { TopBar(iconOnClick = iconOnClick) },
     bottomBar = { BottomBar(onClick = toggleTimer, iconOnClick = iconOnClick) },
-    floatingActionButtonPosition = FabPosition.Center,
     floatingActionButton = {
       FloatingActionButton(
         onClick = toggleTimer,
@@ -100,7 +82,7 @@ fun ExampleScaffold(viewModel: ExampleViewModel = viewModel()) {
     content = { innerPadding ->
       Box(
         modifier = Modifier
-          .padding(innerPadding) // これがないと、TopBarの下に表示されてしまう。
+          .padding(innerPadding)
           .background(color = MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
       ) {

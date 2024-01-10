@@ -35,13 +35,13 @@ fun Arc(color: Color, timeLeft: Float) {
       offset = Offset((maxSize - minSize) / 2.0f, strokeWidth / 2.0f )
     }
     drawArc(
-      color,
-      0f - 90f,
-      360 * timeLeft,
+      color = color,
+      startAngle = -90.0f,
+      sweepAngle = timeLeft * 360.0f,
       useCenter = false,
-      size = Size(minSize, minSize),
       topLeft = offset,
-      style = Stroke(width = strokeWidth , cap = StrokeCap.Round)
+      size = Size(minSize, minSize),
+      style = Stroke(width = strokeWidth, cap = StrokeCap.Round)
     )
   }
 }
