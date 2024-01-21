@@ -59,55 +59,32 @@ fun AnimationBoxSizePreview() {
   Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
     AnimationBoxSize(
       spring(
-        // dampingRatio は、ばねの弾性を定義します。デフォルト値は Spring.DampingRatioNoBouncy です。
         dampingRatio = Spring.DampingRatioHighBouncy,
-        // stiffness は、終了値までのばねの移動速度を定義します。デフォルト値は Spring.StiffnessMedium です。
         stiffness = Spring.StiffnessMedium
       ), "ばねアニメーション"
     )
     AnimationBoxSize(
-      // トゥイーンアニメーション
-      // イージング カーブを使用して、指定された時間で目標値に向かってアニメーション化します。
       tween(
-        // アニメーションの継続時間
         durationMillis = 2000,
-        // アニメーションの開始を延期する。
         delayMillis = 40,
-        // 開始と終了の間を補間するために使用されるイージングカーブ
         easing = FastOutLinearInEasing
       ), "トゥイーンアニメーション"
     )
     AnimationBoxSize(
-      // 繰り返しアニメーション
-      // 初期値とターゲットの間で繰り返すアニメーションを作成します。
       repeatable(
-        // iterations - 反復の合計数．繰り返す場合は，1より大きくなければなりません．
         iterations = 3,
-        //  animation - 繰り返し再生されるアニメーションです。
         animation = tween(durationMillis = 500),
-        // repeatMode - アニメーションを最初から繰り返すか（ RepeatMode.Restart など）、最後から繰り返すか（ RepeatMode.Reverse など）です。
         repeatMode = RepeatMode.Reverse
-        // initialStartOffset - アニメーションの開始をオフセットします。
       ), "繰り返しアニメーション"
     )
     AnimationBoxSize(
-      // 無限繰り返しアニメーション
-      // 繰り返しアニメーションと同じですが無限に繰り返します。
       infiniteRepeatable(
-        // animation - 繰り返し再生されるアニメーションです。
-        // repeatMode - アニメーションを最初から繰り返すか（ RepeatMode.Restart など）、最後から繰り返すか（ RepeatMode.Reverse など）です。
-        // initialStartOffset - アニメーションの開始をオフセットします。
         animation = tween(durationMillis = 500),
         repeatMode = RepeatMode.Reverse
       ),
       "無限繰り返しアニメーション"
     )
     AnimationBoxSize(
-
-// https://developer.android.com/jetpack/compose/animation?hl=ja#keyframesß
-// keyframes
-//keyframes は、アニメーションの持続時間内の異なるタイムスタンプで指定されたスナップショット値に基づいてアニメーション化します。アニメーション値は、常に 2 つのキーフレーム値の間で補間されます。これらのキーフレームごとに、イージングを指定して補間曲線を設定できます。
-
       keyframes {
         durationMillis = 1000
         0.0f at 0 with LinearOutSlowInEasing // for 0-750 ms
@@ -117,31 +94,10 @@ fun AnimationBoxSizePreview() {
       "キーフレームアニメーション"
     )
     AnimationBoxSize(
-      //snap
-//snap は、値をすぐに終了値に切り替える特別な AnimationSpec です。delayMillis を指定して、アニメーションの開始を遅らせることができます。
-
-      //アニメーションする値をすぐに終了値に切り替えるための
-      // Snapアニメーションを作成する。
-      //パラメータは以下のとおりです。
-      //delayMillis - アニメーションが実行されるまでの
-      // 待ち時間（ミリ秒）です。デフォルトでは0です。
       snap(
         delayMillis = 1000
       ),
       "スナップアニメーション"
     )
-
   }
 }
-/**
-Compose には、Float、Color、Dp、Size、Offset、Rect、Int、IntOffset、IntSize 用の animate*AsState 関数が、すぐに使える状態で用意されています。
-animateFloatAsState
-animateColorAsState
-animateDpAsState
-animateSizeAsState
-animateOffsetAsState
-animateRectAsState
-animateIntAsState
-animateIntOffsetAsState
-animateIntSizeAsState
- */
