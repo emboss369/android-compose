@@ -35,7 +35,7 @@ enum class BoxState {
 @Composable
 fun UpdateTransitionView() {
   var currentState by remember { mutableStateOf(BoxState.Small) }
-  val transition = updateTransition(currentState)
+  val transition = updateTransition(targetState = currentState)
 
   val size by transition.animateFloat { state ->
     when (state) {
