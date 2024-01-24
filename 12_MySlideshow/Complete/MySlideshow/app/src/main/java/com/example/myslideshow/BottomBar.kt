@@ -24,61 +24,68 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun BottomBar(
-  pagerState: PagerState,
+  pagerState: PagerState
 ) {
   val scope = rememberCoroutineScope()
   BottomAppBar {
     Row(
       horizontalArrangement = Arrangement.Center,
-      modifier = Modifier.fillMaxWidth(),
-    ){
-    IconButton(
-      onClick = {
-        scope.launch {
-          pagerState.animateScrollToPage(0)
-        }
-      },
-      enabled = pagerState.currentPage > 0
+      modifier = Modifier.fillMaxWidth()
     ) {
-      Icon(imageVector = Icons.Default.FirstPage, contentDescription = null)
+      IconButton(
+        onClick = {
+          scope.launch {
+            pagerState.animateScrollToPage(0)
+          }
+        },
+        enabled = pagerState.currentPage > 0
+      ) {
+        Icon(
+          imageVector = Icons.Default.FirstPage,
+          contentDescription = "最初のページ"
+        )
+      }
+      IconButton(
+        onClick = {
+          scope.launch {
+            pagerState.animateScrollToPage(pagerState.currentPage - 1)
+          }
+        },
+        enabled = pagerState.currentPage > 0
+      ) {
+        Icon(
+          imageVector = Icons.Default.NavigateBefore,
+          contentDescription = "前のページ"
+        )
+      }
+      IconButton(
+        onClick = {
+          scope.launch {
+            pagerState.animateScrollToPage(pagerState.currentPage + 1)
+          }
+        },
+        enabled = pagerState.currentPage < pagerState.pageCount - 1
+      ) {
+        Icon(
+          imageVector = Icons.Default.NavigateNext,
+          contentDescription = "次のページ"
+        )
+      }
+      IconButton(
+        onClick = {
+          scope.launch {
+            pagerState.animateScrollToPage(pagerState.pageCount - 1)
+          }
+        },
+        enabled = pagerState.currentPage < pagerState.pageCount - 1
+      ) {
+        Icon(
+          imageVector = Icons.Default.LastPage,
+          contentDescription = "最後のページ"
+        )
+      }
+
     }
-    IconButton(
-      onClick = {
-        scope.launch {
-          pagerState.animateScrollToPage(pagerState.currentPage - 1)
-        }
-      },
-      enabled = pagerState.currentPage > 0
-    ) {
-      Icon(
-        imageVector = Icons.Default.NavigateBefore,
-        contentDescription = null
-      )
-    }
-    IconButton(
-      onClick = {
-        scope.launch {
-          pagerState.animateScrollToPage(pagerState.currentPage + 1)
-        }
-      },
-      enabled = pagerState.currentPage < pagerState.pageCount - 1
-    ) {
-      Icon(
-        imageVector = Icons.Default.NavigateNext,
-        contentDescription = null
-      )
-    }
-    IconButton(
-      onClick = {
-        scope.launch {
-          pagerState.animateScrollToPage(pagerState.pageCount - 1)
-        }
-      },
-      enabled = pagerState.currentPage < pagerState.pageCount - 1
-    ) {
-      Icon(imageVector = Icons.Default.LastPage, contentDescription = null)
-    }
-  }
   }
 }
 
@@ -87,7 +94,7 @@ fun BottomBar(
 @Composable
 fun BottomBarPreview() {
   MySlideshowTheme {
-    val pagerState = rememberPagerState(pageCount = { 3 })
-    BottomBar(pagerState)
+    val pageSate = rememberPagerState(pageCount = { 10 })
+    BottomBar(pagerState = pageSate)
   }
 }
