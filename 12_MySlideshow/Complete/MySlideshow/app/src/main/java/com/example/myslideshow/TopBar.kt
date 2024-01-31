@@ -32,7 +32,7 @@ fun TopBar() {
         Icon(
           imageVector = Icons.Default.Slideshow,
           tint = MaterialTheme.colorScheme.onPrimary,
-          contentDescription = "Slideshow"
+          contentDescription = "スライドショー"
         )
       }
     },

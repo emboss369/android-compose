@@ -2,21 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AnimatableViewPreview">
-        <State />
-      </entry>
-      <entry key="AnimationBoxSizePreview">
-        <State />
-      </entry>
-      <entry key="ChangeTwoWindowPreview">
-        <State />
-      </entry>
-      <entry key="RememberInfiniteTransitionViewPreview">
-        <State />
-      </entry>
-      <entry key="TutorialPagerPreview">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
