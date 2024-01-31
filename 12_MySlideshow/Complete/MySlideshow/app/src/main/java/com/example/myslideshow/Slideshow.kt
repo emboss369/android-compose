@@ -8,10 +8,12 @@ import androidx.compose.foundation.pager.VerticalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myslideshow.ui.theme.MySlideshowTheme
+import kotlinx.coroutines.delay
 
 
 val resources = listOf(
@@ -26,6 +28,16 @@ val resources = listOf(
 @Composable
 fun Slideshow() {
   val pagerState = rememberPagerState(pageCount = { resources.size })
+
+  LaunchedEffect(pagerState) {
+    while (true) {
+      delay(3000)
+      pagerState.animateScrollToPage(
+        page = (pagerState.currentPage + 1) % resources.size
+      )
+    }
+  }
+
   Scaffold(
     topBar = { TopBar() },
     bottomBar = { BottomBar(pagerState) },
