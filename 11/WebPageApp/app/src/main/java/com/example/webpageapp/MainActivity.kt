@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
 //                                newText ->  text = newText
 //                        })
                     //}
-                    TabViewWeb()
+                    TabViewWeb1()
                 }
             }
         }
@@ -172,11 +172,23 @@ fun TabViewWeb1() {
                 )
             }
         }
+//        when (tabIndex) {
+//            0 -> Text("Tab $tabIndex")
+//            1 -> WebPageView(url = "https://www.yahoo.co.jp/")
+//            2 -> WebPageView(url = "https://bing.com/")
+//            3 -> WebPageView(url = "https://bing.com/")
+//            4 -> Text("Tab $tabIndex")
+//        }
         when (tabIndex) {
-            0 -> Text("Tab $tabIndex")
-            1 -> WebPageView2(url = "https://www.yahoo.co.jp/")
-            2 -> WebPageView2(url = "https://bing.com/")
-            3 -> WebPageView2(url = "https://bing.com/")
+            0 -> Text("Home Tab")
+            1 -> WebPageView(url = "https://www.yahoo.co.jp/")
+            2 -> Text("Settings Tab")
+            3 -> Text("User Tab")
+            4 -> Text("Nice Tab")
+            5 -> Text("Email Tab")
+            6 -> Text("Star Tab")
+            7 -> Text("Menu Tab")
+            // 他のインデックスに対応するコンテンツをここに追加します
         }
     }
 }
@@ -213,10 +225,9 @@ fun TabViewWeb() {
             }
         }
         when (tabIndex) {
-            0 -> Text("Tab $tabIndex")
-            1 -> WebPageView2(url = "https://www.yahoo.co.jp/")
-            2 -> WebPageView2(url = "https://bing.com/")
-            3 -> WebPageView2(url = "https://bing.com/")
+            0 -> WebPageView(url = "https://www.yahoo.co.jp/")
+            1 -> WebPageView(url = "https://www.yahoo.co.jp/")
+            2 -> WebPageView(url = "https://www.google.com/")
         }
     }
 }
