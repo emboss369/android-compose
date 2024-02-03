@@ -3,13 +3,7 @@ package com.example.postmystory
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -21,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.postmystory.ui.theme.PostMyStoryTheme
 
@@ -35,51 +28,40 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       val messages = remember { mutableStateListOf<Message>() }
-      var scene by remember{ mutableStateOf(Scene.LIST) }
-      var selectUrl by remember{ mutableStateOf("") }
-      var caption by remember{ mutableStateOf("") }
+      var scene by remember { mutableStateOf(Scene.LIST) }
+      var selectUrl by remember { mutableStateOf("") }
+      var caption by remember { mutableStateOf("") }
       PostMyStoryTheme {
         // A surface container using the 'background' color from the theme
         Surface(
           modifier = Modifier.fillMaxSize(),
           color = MaterialTheme.colorScheme.background
         ) {
-          when(scene) {
+          when (scene) {
             Scene.LIST -> {
-              ListScreen(
-                messages = messages,
-                onClick = {
-                  scene = Scene.PHOTOS
-                }
-              )
+              ListScreen(messages = messages, onClick = {
+                scene = Scene.PHOTOS
+              })
             }
+
             Scene.PHOTOS -> {
-              PhotoGridScreen(
-                onClick = { url ->
-                  scene = Scene.CAPTION
-                  selectUrl = url
-                }
-              )
+              PhotoGridScreen(onClick = { url ->
+                selectUrl = url
+                scene = Scene.CAPTION
+              })
             }
 
             Scene.CAPTION -> {
-              CaptionScreen(
-                selectUrl = selectUrl,
-                onClick = {
-                  messages.add(
-                    index = 0,
-                    element = Message(
-                      image = selectUrl,
-                      caption = caption,
-                      nice = 0
-                    )
+              CaptionScreen(selectUrl = selectUrl, onClick = {
+                messages.add(
+                  Message(
+                    image = selectUrl, caption = caption, nice = 0
                   )
-                  scene = Scene.LIST
-                },
-                onChange = { newText ->
-                  caption = newText
-                }
-              )
+                )
+                scene = Scene.LIST
+              }, onChange = { newText ->
+                caption = newText
+              })
             }
           }
         }
@@ -89,12 +71,24 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun CoilTest() {
-  AsyncImage(
-    model = "https://developer.android.com/static/images/brand/Android_Robot.png",
-    contentDescription = null,
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+  Text(
+    text = "Hello $name!", modifier = modifier
   )
 }
 
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+  PostMyStoryTheme {
+    Greeting("Android")
+  }
+}
 
-
+@Composable
+fun CoilTest() {
+  AsyncImage(
+    model = "https://developer.android.com/static/images/brand/Android_Robot.png",
+    contentDescription = null
+  )
+}

@@ -20,40 +20,30 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myanimation.ui.theme.MyAnimationTheme
 
-/**
- * インジケータのドットを表示します。
- *
- * @param totalDots ドットの総数
- * @param selectedIndex 選択されているドットのインデックス
- * @param selectedColor 選択されているドットの色
- * @param unSelectedColor 選択されていないドットの色
- * @param modifier Modifier
- */
 @Composable
 fun DotsIndicator(
   totalDots: Int,
   selectedIndex: Int,
   selectedColor: Color,
-  unSelectedColor: Color,
+  unselectedColor: Color,
   modifier: Modifier = Modifier
 ) {
   LazyRow(
     modifier = modifier
       .wrapContentWidth()
       .wrapContentHeight()
-  ) {
+  ){
     items(totalDots) { index ->
       val color by animateColorAsState(
-        targetValue = if (index == selectedIndex) selectedColor
-        else unSelectedColor,
+        targetValue = if (index == selectedIndex) selectedColor else unselectedColor,
         animationSpec = tween(1000),
         label = "dot color animation"
       )
       Box(
         modifier = Modifier
           .size(10.dp)
-          .clip(CircleShape)
-          .background(color)
+          .clip(shape = CircleShape)
+          .background(color = color)
       )
       if (index != totalDots - 1) {
         Spacer(modifier = Modifier.padding(horizontal = 2.dp))
@@ -62,15 +52,15 @@ fun DotsIndicator(
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun DotIndicatorPreview() {
+fun DotsIndicatorPreview() {
   MyAnimationTheme {
     DotsIndicator(
-      totalDots = 10,
-      selectedIndex = 1,
+      totalDots = 5,
+      selectedIndex = 2,
       selectedColor = Color.Black,
-      unSelectedColor = Color.LightGray
+      unselectedColor = Color.LightGray
     )
   }
 }

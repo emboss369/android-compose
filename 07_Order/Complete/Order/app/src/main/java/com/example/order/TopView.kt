@@ -45,65 +45,35 @@ fun TopView(onTapButton: () -> Unit) {
           withStyle(style = SpanStyle(color = Color.Red)) {
             append("Colbar's")
           }
-          append(" burger ")
+          append(" burger")
         },
         modifier = Modifier
-          .background(color = Color.Transparent)
           .width(300.dp),
         color = Color.Blue,
         fontSize = 80.sp,
         fontStyle = FontStyle.Italic,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
+        fontFamily = FontFamily.SansSerif,
         style = TextStyle(
           shadow = Shadow(
             color = Color.White,
-            offset = Offset(10.0f, 10.0f),
-            blurRadius = 0.0f
+            blurRadius = 10f,
+            offset = Offset(10f, 10f)
           )
-        ),
-        // フォントの変更（Serif、Sans Serif、Monospace、Cursive ）
-        fontFamily = FontFamily.SansSerif
+        )
       )
     }
-    Button(onClick = {
-      // 状態ホイスティング
-      onTapButton()
-    }) {
-      Text("注文へ")
+    Button(onClick = { onTapButton() }) {
+      Text(text = "注文へ")
     }
   }
 }
-//@Preview(widthDp = 360, heightDp = 640, showBackground = true)
-//@Composable
-//fun TopViewFirstPreview() {
-//  OrderTheme{
-//    Column(
-//      modifier = Modifier.background(Color.Yellow),
-//      horizontalAlignment = Alignment.CenterHorizontally,
-//      verticalArrangement = Arrangement.SpaceEvenly
-//    ){
-//      Box{
-//        // Image()
-//        Text(
-//          text = "Colbar's burger",
-//          modifier = Modifier
-//            .background(color = Color.Red)
-//            .width(300.dp)
-//        )
-//      }
-//      Button(onClick = { /*TODO*/ }) {
-//        Text("注文へ")
-//      }
-//    }
-//  }
-//}
+
 @Preview(widthDp = 360, heightDp = 640, showBackground = true)
 @Composable
 fun TopViewPreview() {
-  OrderTheme{
-    TopView(onTapButton = {})
+  OrderTheme {
+    TopView(onTapButton = { })
   }
-  
 }
-

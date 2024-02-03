@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.example.countdowntimer
 
 import android.os.Bundle
@@ -13,10 +11,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material.icons.outlined.Timer10Select
 import androidx.compose.material.icons.outlined.Timer3Select
-import androidx.compose.material.icons.sharp.Timer
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -55,8 +51,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun ExampleScaffold(viewModel: ExampleViewModel = viewModel()) {
   val uiState = viewModel.uiState
-
-  val iconOnClick:(Int)->Unit = { time: Int -> viewModel.addTime(time) }
+  val iconOnClick: (Int) -> Unit = { time: Int ->
+    viewModel.addTime(time)
+  }
   val toggleTimer = {
     if (uiState.isRunning) {
       viewModel.stopTimer()
@@ -64,20 +61,14 @@ fun ExampleScaffold(viewModel: ExampleViewModel = viewModel()) {
       viewModel.startTimer(viewModel.uiState.time)
     }
   }
-
-  Scaffold(
-    topBar = { TopBar(iconOnClick = iconOnClick) },
+  Scaffold(topBar = { TopBar(iconOnClick = iconOnClick) },
     bottomBar = { BottomBar(onClick = toggleTimer, iconOnClick = iconOnClick) },
     floatingActionButton = {
-      FloatingActionButton(
-        onClick = toggleTimer,
-        content = {
-          Icon(
-            imageVector = Icons.Filled.Timer,
-            contentDescription = "Timer"
-          )
-        }
-      )
+      FloatingActionButton(onClick = toggleTimer, content = {
+        Icon(
+          imageVector = Icons.Filled.Timer, contentDescription = "Timer"
+        )
+      })
     },
     content = { innerPadding ->
       Box(
@@ -86,19 +77,23 @@ fun ExampleScaffold(viewModel: ExampleViewModel = viewModel()) {
           .background(color = MaterialTheme.colorScheme.background),
         contentAlignment = Alignment.Center
       ) {
-        Arc(color = MaterialTheme.colorScheme.primary,
+        Arc(
+          color = MaterialTheme.colorScheme.primary,
           timeLeft = uiState.timeLeft.toFloat() / uiState.time.toFloat()
         )
         val minute = uiState.timeLeft / 1000L / 60L
         val second = uiState.timeLeft / 1000L % 60L
-        Text("%1d:%2$02d".format(minute, second), fontSize = 100.sp,
-          color = MaterialTheme.colorScheme.primary)
+        Text(
+          text = "%1$02d:%2$02d".format(minute, second),
+          fontSize = 100.sp,
+          color = MaterialTheme.colorScheme.primary
+        )
       }
-    }
-  )
+    })
 }
 
-@Preview(widthDp = 300, heightDp = 500)
+
+@Preview(widthDp = 300, heightDp = 500, showBackground = true)
 @Composable
 fun ExampleScaffoldPreview() {
   CountDownTimerTheme {
@@ -106,65 +101,53 @@ fun ExampleScaffoldPreview() {
   }
 }
 
-/**
- * @param iconOnClick タイマーの時間を設定するときに呼ばれる
- */
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBar(
-  iconOnClick: (Int) -> Unit
+  iconOnClick: (Int) -> Unit,
 ) {
-  TopAppBar(
-    title = {
-      Text(
-        "Simple TopAppBar",
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-      )
-    },
-    navigationIcon = {
-      IconButton(onClick = { /* doSomething() */ }) {
-        Icon(
-          imageVector = Icons.Sharp.Timer,
-          contentDescription = "Timer"
-        )
-      }
-    },
-    actions = {
-      IconButton(onClick = { iconOnClick(3) }) {
-        Icon(
-          imageVector = Icons.Outlined.Timer3Select,
-          contentDescription = "Timer3Select"
-        )
-      }
-      IconButton(onClick = { iconOnClick(10) }) {
-        Icon(
-          imageVector = Icons.Outlined.Timer10Select,
-          contentDescription = "Timer10Select"
-        )
-      }
-    },
-    colors = TopAppBarDefaults.topAppBarColors(
-      containerColor = MaterialTheme.colorScheme.primary
+  TopAppBar(title = {
+    Text(
+      text = "Simple TopAppBar",
+      maxLines = 1,
+      overflow = TextOverflow.Ellipsis
     )
+  }, navigationIcon = {
+    IconButton(onClick = { /*TODO*/ }) {
+      Icon(
+        imageVector = Icons.Filled.Timer, contentDescription = "Timer"
+      )
+    }
+  }, actions = {
+    IconButton(onClick = { iconOnClick(3) }) {
+      Icon(
+        imageVector = Icons.Outlined.Timer3Select,
+        contentDescription = "Timer3Select"
+      )
+    }
+    IconButton(onClick = { iconOnClick(10) }) {
+      Icon(
+        imageVector = Icons.Outlined.Timer10Select,
+        contentDescription = "Timer10Select"
+      )
+    }
+  }, colors = TopAppBarDefaults.topAppBarColors(
+    containerColor = MaterialTheme.colorScheme.primary
+  )
   )
 }
 
 @Preview
 @Composable
-fun TopBarPrev() {
+fun TopBarPreview() {
   CountDownTimerTheme {
     TopBar(iconOnClick = {})
   }
 }
 
-/**
- * @param onClick タイマーを開始するときに呼ばれる
- * @param iconOnClick タイマーの時間を設定するときに呼ばれる
- */
 @Composable
 fun BottomBar(
-  onClick: () -> Unit,
-  iconOnClick: (Int) -> Unit
+  onClick: () -> Unit, iconOnClick: (Int) -> Unit
 ) {
   BottomAppBar(actions = {
     IconButton(onClick = { iconOnClick(3) }) {
@@ -180,11 +163,11 @@ fun BottomBar(
       )
     }
   }, floatingActionButton = {
-    FloatingActionButton(onClick = { onClick() }) {
+    FloatingActionButton(onClick = onClick, content = {
       Icon(
         imageVector = Icons.Filled.Timer, contentDescription = "Timer"
       )
-    }
+    })
   })
 }
 
@@ -195,4 +178,3 @@ fun BottomAppBarPreview() {
     BottomBar(onClick = {}, iconOnClick = {})
   }
 }
-

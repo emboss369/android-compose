@@ -10,7 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -21,16 +21,16 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SecondaryTabRowScreen() {
-  var tabIndex by remember { mutableIntStateOf(0) }
+  var tabIndex by remember { mutableStateOf(0) }
   val tabs = listOf("おすすめ", "人気", "カテゴリ", "新着", "ランキング")
-  var secondIndex by remember { mutableIntStateOf(0) }
+  var secondIndex by remember { mutableStateOf(0) }
   Scaffold(
     topBar = {
       Column {
-        TopAppBar(title = { Text("SecondaryTabRow") })
+        TopAppBar(title = { Text("Secondary Tab Row") })
         PrimaryTabRowView(tabIndex = tabIndex, onTabChange = { tabIndex = it })
       }
-    },
+    }
   ) { padding ->
     Box(
       modifier = Modifier
@@ -40,13 +40,14 @@ fun SecondaryTabRowScreen() {
     ) {
       when (tabIndex) {
         0 -> {
-          SecondaryTabRowView(tabs = tabs,
+          SecondaryTabRowView(
+            tabs = tabs,
             tabIndex = secondIndex,
-            onTabChange = { index ->
-              secondIndex = index
-            })
+            onTabChange = { secondIndex = it }
+          )
           Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+              .fillMaxSize(),
             contentAlignment = Alignment.Center
           ) {
             Text(
@@ -55,14 +56,14 @@ fun SecondaryTabRowScreen() {
           }
         }
 
-        1 -> WebView(url = "https://developer.android.com/")
-        2 -> WebView(url = "https://www.google.com/")
+        1 -> WebView(url = "https://developer.android.com")
+        2 -> WebView(url = "https://www.google.com")
       }
     }
   }
 }
 
-@Preview(showBackground = true, widthDp = 320, heightDp = 640)
+@Preview
 @Composable
 fun SecondaryTabRowScreenPreview() {
   SecondaryTabRowScreen()

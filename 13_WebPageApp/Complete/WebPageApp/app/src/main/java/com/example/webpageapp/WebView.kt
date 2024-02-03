@@ -12,10 +12,6 @@ fun WebView(url: String) {
         webChromeClient = android.webkit.WebChromeClient()
         webViewClient = android.webkit.WebViewClient()
         settings.javaScriptEnabled = true
-        layoutParams = android.view.ViewGroup.LayoutParams(
-          android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-          android.view.ViewGroup.LayoutParams.MATCH_PARENT
-        )
         loadUrl(url)
       }
     }
@@ -25,5 +21,5 @@ fun WebView(url: String) {
 @Preview
 @Composable
 fun WebViewPreview() {
-  WebView(url = "https://www.yahoo.co.jp/")
+  WebView("https://www.google.com")
 }

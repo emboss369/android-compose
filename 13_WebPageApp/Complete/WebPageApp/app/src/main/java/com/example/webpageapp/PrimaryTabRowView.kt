@@ -10,13 +10,15 @@ import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.webpageapp.ui.theme.WebPageAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PrimaryTabRowView(tabIndex: Int, onTabChange: (Int) -> Unit) {
-
   val tabs = listOf(
     "Home" to Icons.Default.Home,
     "About" to Icons.Default.Info,
@@ -34,13 +36,13 @@ fun PrimaryTabRowView(tabIndex: Int, onTabChange: (Int) -> Unit) {
           )
         })
     }
+
   }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PrimaryTabRowViewPreview() {
-  WebPageAppTheme {
-    PrimaryTabRowView(0, onTabChange = { })
-  }
+  var index by remember { mutableStateOf(0) }
+  PrimaryTabRowView(tabIndex = index, onTabChange = { index = it })
 }

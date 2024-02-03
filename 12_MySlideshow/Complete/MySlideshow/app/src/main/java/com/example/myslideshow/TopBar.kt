@@ -1,7 +1,6 @@
 package com.example.myslideshow
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Slideshow
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -28,11 +27,11 @@ fun TopBar() {
       )
     },
     navigationIcon = {
-      IconButton(onClick = { /* doSomething() */ }) {
+      IconButton(onClick = { /*TODO*/ }) {
         Icon(
           imageVector = Icons.Default.Slideshow,
           tint = MaterialTheme.colorScheme.onPrimary,
-          contentDescription = "スライドショー"
+          contentDescription = "スライドショー",
         )
       }
     },
@@ -44,7 +43,7 @@ fun TopBar() {
 
 @Preview
 @Composable
-fun TopBarPrev() {
+fun TopBarPreview() {
   MySlideshowTheme {
     TopBar()
   }

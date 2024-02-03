@@ -9,12 +9,9 @@ import androidx.compose.runtime.setValue
 @Composable
 fun MainScreen() {
   var isOrderView by remember { mutableStateOf(false) }
-
   if (isOrderView) {
     OrderView()
   } else {
-    TopView(onTapButton = {
-      isOrderView = true
-    })
+    TopView(onTapButton = { isOrderView = true })
   }
 }

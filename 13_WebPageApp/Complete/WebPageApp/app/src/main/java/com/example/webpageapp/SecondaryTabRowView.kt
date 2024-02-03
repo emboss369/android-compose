@@ -13,21 +13,26 @@ import androidx.compose.ui.tooling.preview.Preview
 fun SecondaryTabRowView(
   tabs: List<String>, tabIndex: Int, onTabChange: (Int) -> Unit
 ) {
-  SecondaryScrollableTabRow(
-    selectedTabIndex = tabIndex,
+  SecondaryScrollableTabRow(selectedTabIndex = tabIndex,
     containerColor = MaterialTheme.colorScheme.secondaryContainer
   ) {
     tabs.forEachIndexed { index, title ->
-      Tab(text = { Text(title) },
+      Tab(
         selected = tabIndex == index,
-        onClick = { onTabChange(index) })
+        onClick = { onTabChange(index) },
+        text = { Text(title) }
+      )
     }
+
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun SecondaryTabRowViewPreview() {
-  val tabs = listOf("おすすめ", "人気", "カテゴリ", "新着", "ランキング")
-  SecondaryTabRowView(tabs, 0, onTabChange = { })
+  SecondaryTabRowView(
+    tabs = listOf("Home", "About", "Settings"),
+    tabIndex = 0,
+    onTabChange = { }
+  )
 }

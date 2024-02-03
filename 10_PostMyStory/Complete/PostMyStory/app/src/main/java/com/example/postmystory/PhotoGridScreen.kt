@@ -10,21 +10,21 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun PhotoGridScreen(onClick: (String) -> Unit) {
   val photos = mutableListOf<String>().apply {
-    for(i in 1..24) {
-      add("https://picsum.photos/seed/${i}/200")
+    for (i in 1..24) {
+      add("https://picsum.photos/seed/$i/200/200")
     }
   }
   LazyVerticalGrid(
     columns = GridCells.Adaptive(minSize = 128.dp)
   ) {
-
     items(items = photos) { photo ->
-      PhotoItem(photo, onClick)
+      PhotoItem(photo = photo, onClick = onClick)
     }
   }
 }
-@Preview(showBackground = true)
+
+@Preview
 @Composable
 fun PhotoGridScreenPreview() {
-  PhotoGridScreen(){}
+  PhotoGridScreen(onClick = { })
 }

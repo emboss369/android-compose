@@ -1,14 +1,11 @@
 package com.example.postmystory
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.material3.Icon
@@ -29,7 +26,6 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.transform.RoundedCornersTransformation
-import com.example.postmystory.ui.theme.PostMyStoryTheme
 
 @Composable
 fun ArticleView(message: Message) {
@@ -43,7 +39,9 @@ fun ArticleView(message: Message) {
         .data(message.image)
         .crossfade(true)
         .diskCachePolicy(CachePolicy.DISABLED)
-        .transformations(RoundedCornersTransformation(40f))
+        .transformations(
+          RoundedCornersTransformation(40f)
+        )
         .build(),
       contentDescription = null,
       contentScale = ContentScale.FillWidth,
@@ -58,7 +56,7 @@ fun ArticleView(message: Message) {
         contentDescription = null
       )
       Text(
-        text = "「Nice!」${message.nice}件"
+        text = "「Nice!」 ${message.nice}件"
       )
     }
     var folding by remember { mutableStateOf(true) }
@@ -68,21 +66,21 @@ fun ArticleView(message: Message) {
       overflow = TextOverflow.Ellipsis,
       modifier = Modifier
         .padding(16.dp)
-        .clickable { folding = !folding }
+        .clickable {
+          folding = !folding
+        }
     )
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun ArticleViewPreview() {
-  PostMyStoryTheme {
-    ArticleView(
-      message = Message(
-        image = "https://picsum.photos/200/200",
-        caption = "Hello World!".repeat(20),
-        nice = 999
-      )
+  ArticleView(
+    Message(
+      caption = "Hello Android".repeat(20),
+      image = "https://picsum.photos/200/200",
+      nice = 999
     )
-  }
+  )
 }

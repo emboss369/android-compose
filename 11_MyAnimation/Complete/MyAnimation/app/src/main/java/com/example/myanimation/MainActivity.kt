@@ -11,6 +11,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,11 +37,13 @@ class MainActivity : ComponentActivity() {
   }
 }
 
+
+
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TutorialPager() {
   val imageRes = intArrayOf(
-    R.drawable.tutorial0, R.drawable.tutorial1, R.drawable.tutorial2
+    R.drawable.tutorial0,R.drawable.tutorial1,R.drawable.tutorial2
   )
   val title = arrayOf(
     "いつは十月もっともこういう束縛者に対するのの中にするたで",
@@ -55,11 +58,8 @@ fun TutorialPager() {
   val pagerState = rememberPagerState(pageCount = { 3 })
   Box(
     modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.BottomCenter
-  ) {
-    HorizontalPager(
-      state = pagerState, modifier = Modifier.fillMaxSize()
-    ) { page ->
-
+  ){
+    HorizontalPager(state = pagerState, modifier = Modifier.fillMaxSize()) { page ->
       val pageOffset =
         ((pagerState.currentPage - page) + pagerState.currentPageOffsetFraction)
           .absoluteValue
@@ -74,10 +74,9 @@ fun TutorialPager() {
       modifier = Modifier.padding(bottom = 50.dp),
       totalDots = 3,
       selectedIndex = pagerState.currentPage,
-      selectedColor = MaterialTheme.colorScheme.primary ,
-      unSelectedColor = MaterialTheme.colorScheme.onBackground
+      selectedColor = MaterialTheme.colorScheme.primary,
+      unselectedColor = MaterialTheme.colorScheme.onBackground
     )
-
   }
 }
 

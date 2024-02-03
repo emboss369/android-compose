@@ -23,7 +23,6 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.transform.RoundedCornersTransformation
-import com.example.postmystory.ui.theme.PostMyStoryTheme
 
 @Composable
 fun CaptionScreen(
@@ -36,19 +35,26 @@ fun CaptionScreen(
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
     AsyncImage(
-      modifier = Modifier.aspectRatio(1f).padding(16.dp).fillMaxWidth(),
+      modifier = Modifier
+        .aspectRatio(1f)
+        .padding(16.dp)
+        .fillMaxWidth(),
       model = ImageRequest.Builder(LocalContext.current)
         .data(selectUrl)
         .crossfade(true)
         .diskCachePolicy(CachePolicy.DISABLED)
-        .transformations(RoundedCornersTransformation(40f))
+        .transformations(
+          RoundedCornersTransformation(40f)
+        )
         .build(),
       placeholder = painterResource(id = R.drawable.now_loading),
       contentDescription = null,
       contentScale = ContentScale.FillWidth
     )
     TextField(
-      modifier = Modifier.fillMaxWidth().padding(16.dp),
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(16.dp),
       value = text,
       onValueChange = { newText ->
         text = newText
@@ -62,14 +68,12 @@ fun CaptionScreen(
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun CaptionScreenPreview() {
-  PostMyStoryTheme {
-    CaptionScreen(
-      selectUrl = "https://picsum.photos/200/200",
-      onClick = {},
-      onChange = {}
-    )
-  }
+  CaptionScreen(
+    selectUrl = "https://picsum.photos/200/200",
+    onClick = { },
+    onChange = { }
+  )
 }

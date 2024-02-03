@@ -2,7 +2,6 @@ package com.example.postmystory.example
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.postmystory.ui.theme.PostMyStoryTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -23,9 +21,7 @@ fun StickyHeader() {
       stickyHeader {
         Text(
           text = section,
-          // onPrimary は MaterialTheme に含まれる色の一つで、プライマリカラー上に表示されるテキストとアイコンに使用される色。
           color = MaterialTheme.colorScheme.onPrimary,
-          // headlineLarge は MaterialTheme に含まれるテキストスタイルの一つで、大きな見出しに使用される。
           style = MaterialTheme.typography.headlineLarge,
           modifier = Modifier
             .fillMaxWidth()
@@ -35,7 +31,7 @@ fun StickyHeader() {
       }
       items(10) { index ->
         Text(
-          text = "Item: $index from section $section",
+          text = "Item : $index from $section",
           modifier = Modifier.padding(16.dp),
           color = MaterialTheme.colorScheme.primary
         )
@@ -44,10 +40,8 @@ fun StickyHeader() {
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun StickyHeaderPreview() {
-  PostMyStoryTheme {
-    StickyHeader()
-  }
+  StickyHeader()
 }

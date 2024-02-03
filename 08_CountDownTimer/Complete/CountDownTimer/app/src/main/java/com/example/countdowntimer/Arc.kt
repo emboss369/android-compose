@@ -10,17 +10,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import kotlin.math.max
 import kotlin.math.min
 
-/**
- * 画面の真ん中に、円弧を描画する。
- * @param color 円弧の色
- * @param timeLeft 残り時間。0.0fから1.0fまでの値をとる。
- */
 @Composable
-fun Arc(color: Color, timeLeft: Float) {
+fun Arc(
+  color: Color,
+  timeLeft: Float
+) {
   Canvas(
     modifier = Modifier
       .fillMaxSize()
@@ -32,7 +29,7 @@ fun Arc(color: Color, timeLeft: Float) {
     if (size.width < size.height) {
       offset = Offset(strokeWidth / 2.0f, (maxSize - minSize) / 2.0f )
     } else {
-      offset = Offset((maxSize - minSize) / 2.0f, strokeWidth / 2.0f )
+      offset = Offset((maxSize - minSize) / 2.0f, strokeWidth / 2.0f)
     }
     drawArc(
       color = color,
@@ -51,13 +48,15 @@ fun Arc(color: Color, timeLeft: Float) {
 fun ArcPreview1() {
   Arc(color = Color.Green, timeLeft = 1.0f)
 }
+
 @Preview(widthDp = 200, heightDp = 300)
 @Composable
 fun ArcPreview2() {
-  Arc(color = Color.Green, timeLeft = 0.75f)
+  Arc(color = Color.Red, timeLeft = 0.75f)
 }
+
 @Preview(widthDp = 500, heightDp = 500)
 @Composable
 fun ArcPreview3() {
-  Arc(color = Color.Green, timeLeft = 0.5f)
+  Arc(color = Color.Blue, timeLeft = 0.5f)
 }

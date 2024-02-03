@@ -11,7 +11,6 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,24 +32,29 @@ fun ListScreen(messages: MutableList<Message>, onClick: () -> Unit) {
       FloatingActionButton(
         onClick = onClick,
         modifier = Modifier.padding(16.dp)
-        ) {
-        Icon(imageVector = Icons.Filled.Add, contentDescription = "追加")
+      ) {
+        Icon(
+          imageVector = Icons.Default.Add,
+          contentDescription = null
+        )
       }
     }
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun ListScreenPreview() {
   val messages = mutableListOf<Message>().apply {
-    for(i in 1..24) {
-      add(Message(
-        image ="https://picsum.photos/seed/${i}/200",
-        caption = "Caption ${i}",
-        nice = i
-      ))
+    for (i in 1..24) {
+      add(
+        Message(
+          image = "https://picsum.photos/seed/$i/200",
+          caption = "Caption $i",
+          nice = i
+        )
+      )
     }
   }
-  ListScreen(messages = messages, onClick = {})
+  ListScreen(messages = messages, onClick = { })
 }

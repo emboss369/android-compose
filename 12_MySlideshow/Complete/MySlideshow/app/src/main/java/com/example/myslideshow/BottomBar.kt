@@ -41,8 +41,7 @@ fun BottomBar(
         enabled = pagerState.currentPage > 0
       ) {
         Icon(
-          imageVector = Icons.Default.FirstPage,
-          contentDescription = "最初のページ"
+          imageVector = Icons.Default.FirstPage, contentDescription = null
         )
       }
       IconButton(
@@ -54,8 +53,7 @@ fun BottomBar(
         enabled = pagerState.currentPage > 0
       ) {
         Icon(
-          imageVector = Icons.Default.NavigateBefore,
-          contentDescription = "前のページ"
+          imageVector = Icons.Default.NavigateBefore, contentDescription = null
         )
       }
       IconButton(
@@ -67,8 +65,7 @@ fun BottomBar(
         enabled = pagerState.currentPage < pagerState.pageCount - 1
       ) {
         Icon(
-          imageVector = Icons.Default.NavigateNext,
-          contentDescription = "次のページ"
+          imageVector = Icons.Default.NavigateNext, contentDescription = null
         )
       }
       IconButton(
@@ -80,11 +77,9 @@ fun BottomBar(
         enabled = pagerState.currentPage < pagerState.pageCount - 1
       ) {
         Icon(
-          imageVector = Icons.Default.LastPage,
-          contentDescription = "最後のページ"
+          imageVector = Icons.Default.LastPage, contentDescription = null
         )
       }
-
     }
   }
 }
@@ -94,7 +89,9 @@ fun BottomBar(
 @Composable
 fun BottomBarPreview() {
   MySlideshowTheme {
-    val pageSate = rememberPagerState(pageCount = { 10 })
-    BottomBar(pagerState = pageSate)
+    val pagerState = rememberPagerState {
+      3
+    }
+    BottomBar(pagerState = pagerState)
   }
 }

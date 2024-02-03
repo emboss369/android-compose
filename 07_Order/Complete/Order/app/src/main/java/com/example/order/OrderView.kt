@@ -41,43 +41,49 @@ import com.example.order.ui.theme.OrderTheme
 fun OrderView() {
   Column(modifier = Modifier.padding(24.dp)) {
     Text(text = "注文画面")
-    var hamburger by remember { mutableStateOf("ハンバーガー") }
-    Column(
-      Modifier.selectableGroup()
-    ) {
+    var hamburger by remember{ mutableStateOf("ハンバーガー") }
+    Column(modifier = Modifier.selectableGroup()) {
       Row(
-        Modifier
+        modifier = Modifier
           .selectable(
-            selected = (hamburger == "ハンバーガー"),
+            selected = hamburger == "ハンバーガー",
             onClick = { hamburger = "ハンバーガー" },
             role = Role.RadioButton
           )
-      ) {
-        RadioButton(selected = hamburger == "ハンバーガー", onClick = null)
+
+      ){
+        RadioButton(
+          selected = hamburger == "ハンバーガー",
+          onClick = null
+        )
         Text(text = "ハンバーガー")
       }
       Row(
-        Modifier
+        modifier = Modifier
           .selectable(
-            selected = (hamburger == "チーズバーガー"),
+            selected = hamburger == "チーズバーガー",
             onClick = { hamburger = "チーズバーガー" },
             role = Role.RadioButton
           )
-      ) {
-        RadioButton(selected = hamburger == "チーズバーガー", onClick = null)
+      ){
+        RadioButton(
+          selected = hamburger == "チーズバーガー",
+          onClick = null
+        )
         Text(text = "チーズバーガー")
       }
     }
 
     Divider()
-
-    Text(text = "サイドメニューをお選びください")
-    var frenchFry by remember { mutableStateOf(false) }
+    Text(text = "サイドメニューを選択してください")
+    var frenchFry by remember{ mutableStateOf(false) }
     Row(
-      Modifier.toggleable(
-      value = frenchFry,
-      role = Role.Checkbox,
-      onValueChange = { frenchFry = !frenchFry})
+      modifier = Modifier
+        .toggleable(
+          value = frenchFry,
+          onValueChange = { frenchFry = !frenchFry },
+          role = Role.Checkbox
+        )
     ) {
       Checkbox(
         checked = frenchFry,
@@ -85,56 +91,60 @@ fun OrderView() {
       )
       Text(text = "フレンチフライ")
     }
-
+    // 区切り線を配置
+    // Textで"ソースの量を調整できます"と表示
+    // sliderPositionというremember変数を0fで初期化
+    // TextでsliderPositionの値を表示
+    // TextでsliderPositionが0.3より少なければ"少なめ"と表示し、 sliderPositionが0．7より多ければ多めと表示、それ以外は普通と表示
+    // Slider配置し変更したら位置をsliderPositionに格納する
     Divider()
-
     Text(text = "ソースの量を調整できます")
-    var sliderPosition by remember { mutableStateOf(0f) }
+    var sliderPosition by remember{ mutableStateOf(0f) }
     Text(text = sliderPosition.toString())
-    Text(
-      text =
-      if (sliderPosition < 0.3) {
-        "少なめ"
-      } else if (sliderPosition > 0.7) {
-        "多め"
-      } else {
-        "普通"
-      }
-    )
+    Text(text = when {
+      sliderPosition < 0.3f -> "少なめ"
+      sliderPosition > 0.7f -> "多め"
+      else -> "普通"
+    })
     Slider(
       value = sliderPosition,
       onValueChange = { sliderPosition = it }
     )
-
+    // 区切り線を配置
     Divider()
-
-    Text(text = "セットドリンクをお選びください")
-    var expanded by remember { mutableStateOf(false) }
-    var drink by remember { mutableStateOf("") }
+    // Textで"ドリンクを選択してください"と表示
+    Text(text = "ドリンクを選択してください")
+    // expandedとdrinkと言う変数を用意し、それぞれフォルストから文字列で初期化します
+    var expanded by remember{ mutableStateOf(false) }
+    var drink by remember{ mutableStateOf("") }
+    // Boxは画面全体を覆うコンテナで、その中にRowとDropdownMenuを配置します
     Box(
       modifier = Modifier
         .fillMaxSize()
         .wrapContentSize(Alignment.TopStart)
     ) {
-      Row(modifier = Modifier
-        .width(200.dp)
-        .clickable { expanded = true }
-        .border(
-          width = 1.dp,
-          color = Color.DarkGray,
-          shape = RoundedCornerShape(4.dp)
-        ),
-        horizontalArrangement = Arrangement.SpaceBetween)
-      {
+      Row(
+        modifier = Modifier
+          .width(200.dp)
+          .clickable { expanded = true }
+          .border(
+            width = 1.dp,
+            color = Color.DarkGray,
+            shape = RoundedCornerShape(4.dp)
+          ),
+        horizontalArrangement = Arrangement.SpaceBetween
+      ) {
         Text(text = drink)
         Icon(
-          Icons.Default.ArrowDropDown,
-          contentDescription = "ArrowDropDown"
+          imageVector = Icons.Filled.ArrowDropDown,
+          contentDescription = "dropdown"
         )
       }
-
-      DropdownMenu(expanded = expanded,
-        onDismissRequest = { expanded = false }) {
+      DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { expanded = false }
+      ) {
+        // ドロップダウンメニューアイテムはドロップダウンメニュー内の各項目を表します。テキストパラメーターにアイスコーヒーと言うテキストをお持ちクリックされると、ドリンク変数にアイスコーヒーが代入され、エキスパンデッドがホルスに設定されるようにしましょう。
         DropdownMenuItem(
           text = { Text(text = "アイスコーヒー") },
           onClick = {
@@ -142,7 +152,7 @@ fun OrderView() {
             expanded = false
           }
         )
-
+        // アイスカフェオレ
         DropdownMenuItem(
           text = { Text(text = "アイスカフェオレ") },
           onClick = {
@@ -151,6 +161,7 @@ fun OrderView() {
           }
         )
         Divider()
+        // コーラ
         DropdownMenuItem(
           text = { Text(text = "コーラ") },
           onClick = {
@@ -158,15 +169,16 @@ fun OrderView() {
             expanded = false
           }
         )
+
       }
     }
   }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun OrderViewPreview() {
-  OrderTheme {
+  OrderTheme{
     OrderView()
   }
 }

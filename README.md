@@ -4,37 +4,32 @@ Android の UI 開発を簡素化し、加速します。
 少ないコード、パワフルなツール、直感的な Kotlin API を使用してアプリをすぐに動かすことができます。
 
 ## 宣言的UI
-ひとコトでいうとリアクティブプログラミングのUI実現
+ひとコトでいうとリアクティブプログラミングのUI実現です。
 
 UIをオブジェクト指向なクラスじゃなくて、静的な関数で作る
 
-UIは静的なものとして開発し、
-それに関連する状態を紐付ける感じ
+UIは静的なものとして開発し、それに関連する状態を紐付ける感じ
 
 ## 公式サイト
 
 https://developer.android.com/jetpack/compose?hl=ja
 
-## 入手する
-https://developer.android.com/jetpack/compose/setup?hl=ja
+## 06 じゃんけんアプリを作ろう
 
-## Composeの設定をする
-https://developer.android.com/jetpack/compose/setup?hl=ja#compose-compiler
+## 07 注文アプリを作ろう
 
-## Compose の思想
-https://developer.android.com/jetpack/compose/mental-model?hl=ja
+## 08 カウントダウンタイマーを作ろう
 
-## Jetpack Compose サンプルアプリを試す
+## 09 カメラアプリを作ろう
 
-## デザインのコードラボ
-https://developer.android.com/codelabs/jetpack-compose-layouts?hl=ja#0
+## 10 インスタ風投稿リストを作ろう
 
-## Composeのカタログアプリ
-https://play.google.com/store/apps/details?id=androidx.compose.material.catalog&hl=ja&gl=US
+## 11 アニメーションするチュートリアル画面を作ろう
 
-## Android Study Jam
+## 12 スライドショーアプリを作ろう
 
-https://rsvp.withgoogle.com/events/asj-japan
+## 13 タブでWebサイトを表示しよう
 
-Pathwayは少し難しいところもありながら、全体を学べる良い教材でした。Pathwayは今まで知らない教材だったので教えていただき良かったです。他にもComposeを学べる資料をぜひ教えてほしいです。
-キックオフ時のライブデモは駆け足すぎてついていけない部分があったので、時間内に終わらすことだけを目的にしていたのかなと思いますが、もうすこしゆっくりと説明しつつComposeの魅力が語られると良かったと思います。
+## 14 桜の名所検索アプリを作ろう
+
+## 15 Todoアプリを作ろう
