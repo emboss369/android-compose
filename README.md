@@ -12,7 +12,7 @@ UIは静的なものとして開発し、それに関連する状態を紐付け
 
 ## 公式サイト
 
-https://developer.android.com/jetpack/compose?hl=ja
+[Kotlin知識ゼロOK！Composeで始めるプロのAndroid開発者になるためのマスターコース](https://smartphone-zine.hateblo.jp/entry/kotlin_compose_android)
 
 ## 06 じゃんけんアプリを作ろう
 
