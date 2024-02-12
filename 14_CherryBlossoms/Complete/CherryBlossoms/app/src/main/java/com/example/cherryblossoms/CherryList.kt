@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun CherryList(
-  cherryList: List<Cherry>, onSelected: (Cherry) -> Unit
+  cherryList: List<Cherry>, onSelected: (Cherry) -> Unit = {}
 ) {
   var searchQuery by remember { mutableStateOf("") }
   val filteredList = cherryList.filter {
