@@ -1,0 +1,80 @@
+@startuml
+skinparam package {
+  backgroundColor<<Repositories>> #F0F6D2
+  backgroundColor<<Data Sources>> #DCEFFF
+}
+
+package "data" {
+
+    package "Repositories" <<Repositories>> {
+        interface ItemsRepository {
+            +getAllItemsStream(): Flow<List<Item>>
+            +getItemStream(id: Int): Flow<Item?>
+            +insertItem(item: Item)
+            +deleteItem(item: Item)
+            +updateItem(item: Item)
+        }
+
+        class DatabaseItemsRepository {
+            -itemDao: ItemDao
+            +getAllItemsStream(): Flow<List<Item>>
+            +getItemStream(id: Int): Flow<Item?>
+            +insertItem(item: Item)
+            +deleteItem(item: Item)
+            +updateItem(item: Item)
+        }
+
+        interface AppContainer {
+            +itemsRepository: ItemsRepository
+        }
+
+        class AppDataContainer {
+            -context: Context
+            +itemsRepository: ItemsRepository
+        }
+
+        ItemsRepository <|.. DatabaseItemsRepository
+        AppContainer <|.. AppDataContainer
+        AppDataContainer -down- ItemsRepository
+    }
+
+    package "Data Sources" <<Data Sources>> {
+        interface ItemDao {
+            +getAllItems(): Flow<List<Item>>
+            +getItem(id: Int): Flow<Item?>
+            +insert(item: Item)
+            +delete(item: Item)
+            +update(item: Item)
+        }
+
+        class Item {
+            +id: Int
+            +name: String
+            +done: Boolean
+        }
+
+        abstract class InventoryDatabase {
+            +itemDao(): ItemDao
+        }
+
+        DatabaseItemsRepository -down- ItemDao
+        ItemDao ..> Item
+        InventoryDatabase -down- ItemDao
+    }
+
+
+
+    package "凡例" <<凡例>> {
+    abstract        abstract
+    interface       interface
+class           class
+
+    legend
+        **凡例**
+        ----
+        (I) : Interface
+        (C) : Class
+        (A) : Abstract Class
+    endlegend
+}
+@enduml
