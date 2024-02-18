@@ -11,22 +11,27 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytodo.R
+import com.example.mytodo.TodoTopAppBar
+import com.example.mytodo.data.Item
+import com.example.mytodo.data.ItemsRepository
 import com.example.mytodo.ui.AppViewModelProvider
-import com.example.mytodo.ui.TodoTopAppBar
 import com.example.mytodo.ui.dialog.DeleteItemDialog
 import com.example.mytodo.ui.navigation.NavigationDestination
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
-
 
 object ItemEditDestination : NavigationDestination {
   override val route = "item_edit"
   override val titleRes = R.string.edit_item_title
   const val itemIdArg = "itemId"
-  val routeWithArgs = "$route/{$itemIdArg}" // TODO:何に使うのか
+  val routeWithArgs = "$route/{$itemIdArg}"
 }
-// Todoアイテム編集画面は、Todoアイテム新規入力画面を使いまわして作る方針
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -75,4 +80,23 @@ fun ItemEditScreen(
       onDismiss = { showDialog = false }
     )
   }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ItemEditScreenPreview() {
+  ItemEditScreen(
+    viewModel = ItemEditViewModel(
+      savedStateHandle = SavedStateHandle(mapOf("itemId" to 1)),
+      itemsRepository = object : ItemsRepository {
+        override fun getAllItemsStream(): Flow<List<Item>> = emptyFlow()
+        override fun getItemStream(id: Int): Flow<Item?> = MutableStateFlow(
+          Item(1, "牛乳を買う", "２カートン", false)
+        )
+
+        override suspend fun insertItem(item: Item) {}
+        override suspend fun deleteItem(item: Item) {}
+        override suspend fun updateItem(item: Item) {}
+      })
+  )
 }
