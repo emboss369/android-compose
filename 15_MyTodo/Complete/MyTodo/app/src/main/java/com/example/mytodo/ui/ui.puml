@@ -1,0 +1,14 @@
+@startuml
+object "TodoNavHost" as TodoNavHost
+object "TodoApp" as TodoApp
+object "HomeScreen\n一覧画面" as HomeScreen
+object "ItemEditScreen\n編集画面" as ItemEditScreen
+object "ItemEntryScreen\n新規入力画面" as ItemEntryScreen
+object "NavHostController" as NavHostController
+
+TodoApp -> TodoNavHost : Uses
+TodoNavHost -> NavHostController : Uses
+NavHostController --> HomeScreen : Navigates to
+NavHostController --> ItemEditScreen : Navigates to
+NavHostController --> ItemEntryScreen : Navigates to
+@enduml

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">MyTodo</string>
-    <string name="back_button">Back</string>
     <string name="item_entry_title">Todo追加</string>
     <string name="no_item_description">Todoアイテムがないようです。\nTodo追加をタップして下さい。</string>
     <string name="done">完了</string>

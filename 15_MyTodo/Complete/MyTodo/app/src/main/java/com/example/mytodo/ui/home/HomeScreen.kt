@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -35,16 +37,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytodo.R
 import com.example.mytodo.data.Item
+import com.example.mytodo.data.ItemsRepository
 import com.example.mytodo.ui.AppViewModelProvider
 import com.example.mytodo.ui.TodoTopAppBar
 import com.example.mytodo.ui.navigation.NavigationDestination
 import com.example.mytodo.ui.theme.MyTodoTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 object HomeDestination : NavigationDestination {
   override val route = "home"
@@ -55,8 +61,8 @@ object HomeDestination : NavigationDestination {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-  navigateToItemEntry: () -> Unit, // FABボタンタップ時の処理
-  navigateToItemUpdate: (Int) -> Unit,
+  navigateToItemEntry: () -> Unit = {}, // FABボタンタップ時の処理
+  navigateToItemUpdate: (Int) -> Unit = {},
   modifier: Modifier = Modifier,
   viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -65,10 +71,8 @@ fun HomeScreen(
   var showDone by remember { mutableStateOf(false) }
   var filteredItemList by remember(itemList, showDone) {
     mutableStateOf(itemList.filter {
-      if (showDone)
-        true
-      else
-        it.done == false
+      if (showDone) true
+      else it.done == false
     })
   }
 
@@ -87,11 +91,7 @@ fun HomeScreen(
       TodoTopAppBar(
         title = stringResource(R.string.app_name),
         canNavigateBack = false, // トップ画面なので戻るアイコンは不要です
-        scrollBehavior = scrollBehavior,
-        onCheckedChange = {
-          showDone = it
-        }
-
+        scrollBehavior = scrollBehavior
       )
     },
     floatingActionButton = {
@@ -112,7 +112,10 @@ fun HomeScreen(
     }) { innerPadding ->
     HomeBody(
       itemList = filteredItemList,
-      onItemClick = navigateToItemUpdate,
+      onItemClick = { navigateToItemUpdate(it.id) },
+      onCheckedChange = {
+        showDone = it
+      },
       modifier = Modifier
         .padding(innerPadding)
         .fillMaxSize()
@@ -121,41 +124,82 @@ fun HomeScreen(
   }
 }
 
+
+@Preview(showBackground = true)
+@Composable
+fun HomeScreenPreview() {
+  val testRepo = object : ItemsRepository {
+    override fun getAllItemsStream(): Flow<List<Item>> = MutableStateFlow(
+      listOf(
+        Item(1, "Item 1", "Description 1", false),
+        Item(2, "Item 2", "Description 2", true)
+      )
+    )
+
+    override fun getItemStream(id: Int): Flow<Item?> = MutableStateFlow(
+      Item(1, "Item 1", "Description 1", false)
+    )
+
+    override suspend fun insertItem(item: Item) {}
+    override suspend fun deleteItem(item: Item) {}
+    override suspend fun updateItem(item: Item) {}
+  }
+  HomeScreen(
+    navigateToItemEntry = {},
+    navigateToItemUpdate = {},
+    viewModel = HomeViewModel(testRepo)
+  )
+}
+
+//@Composable
+//private fun HomeBody(
+//  itemList: List<Item>,
+//  onItemClick: (Int) -> Unit,
+//  onCheckedChange: (Boolean) -> Unit = {},
+//  modifier: Modifier = Modifier
+//) {
+//
+//      TodoList(
+//        itemList = itemList,
+//        onItemClick = { onItemClick(it.id) },
+//        onCheckedChange = onCheckedChange,
+//        modifier = modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
+//      )
+//}
+
 @Composable
 private fun HomeBody(
   itemList: List<Item>,
-  onItemClick: (Int) -> Unit,
+  onItemClick: (Item) -> Unit = {},
+  onCheckedChange: (Boolean) -> Unit = {},
   modifier: Modifier = Modifier
 ) {
-  Column(
-    horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier
-  ) {
-    if (itemList.isEmpty()) {
-      Text(
-        text = stringResource(R.string.no_item_description),
-        textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.titleLarge
-      )
-    } else {
-      TodoList(
-        itemList = itemList,
-        onItemClick = { onItemClick(it.id) },
-        modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
-      )
-    }
-  }
-}
-
-@Composable
-private fun TodoList(
-  itemList: List<Item>,
-  onItemClick: (Item) -> Unit,
-  modifier: Modifier = Modifier
-) {
+  var checked by remember { mutableStateOf(false) }
   LazyColumn(modifier = modifier) {
-    // itemsはインポート必要
-    // import import androidx.compose.foundation.lazy.items
-    // Adds a list of items.
+    item {
+      Row(
+        Modifier.toggleable(value = checked,
+          role = Role.Checkbox,
+          onValueChange = {
+            checked = it
+            onCheckedChange(it)
+          })
+      ) {
+        Checkbox(
+          checked = checked, onCheckedChange = null
+        )
+        Text(text = "完了したTodoも表示する")
+      }
+    }
+    if (itemList.isEmpty()) {
+      item {
+        Text(
+          text = stringResource(R.string.no_item_description),
+          textAlign = TextAlign.Center,
+          style = MaterialTheme.typography.titleLarge
+        )
+      }
+    }
     items(items = itemList, key = { it.id }) { item ->
       TodoItem(item = item,
         modifier = Modifier
@@ -173,9 +217,9 @@ private fun TodoItem(
     modifier = modifier,
     elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
   ) {
-    Box (
+    Box(
       contentAlignment = Alignment.Center
-    ){
+    ) {
       Column(
         modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))

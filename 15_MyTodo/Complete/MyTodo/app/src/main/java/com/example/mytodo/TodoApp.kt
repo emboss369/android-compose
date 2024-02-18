@@ -44,10 +44,8 @@ fun TodoTopAppBar(
   canNavigateBack: Boolean,
   modifier: Modifier = Modifier,
   scrollBehavior: TopAppBarScrollBehavior? = null,
-  onCheckedChange: (Boolean) -> Unit = {},
   navigateUp: () -> Unit = {}
 ) {
-  var checked by remember { mutableStateOf(false) }
   //マテリアルデザインの中央に配置された小さなトップアプリバー。
   //トップアプリバーは、画面の上部に情報やアクションを表示します。
   //この小さなトップアプリバーは、ヘッダーのタイトルが水平に中央に配置されています。
@@ -63,29 +61,10 @@ fun TodoTopAppBar(
         IconButton(onClick = navigateUp) {
           Icon(
             imageVector = Icons.Filled.ArrowBack,
-            contentDescription = stringResource(R.string.back_button)
+            contentDescription = "Back"
           )
         }
 
-      }
-    },
-    actions = {
-      IconToggleButton(checked = checked, onCheckedChange = {
-        checked = it
-        onCheckedChange(it)
-      }) {
-        val tint by animateColorAsState(
-          if (checked)
-            MaterialTheme.colorScheme.primary
-          else
-            MaterialTheme.colorScheme.primaryContainer,
-          label = "IconButton"
-        )
-        Icon(
-          imageVector = Icons.Filled.Done,
-          contentDescription = null,
-          tint = tint
-        )
       }
     }
   )

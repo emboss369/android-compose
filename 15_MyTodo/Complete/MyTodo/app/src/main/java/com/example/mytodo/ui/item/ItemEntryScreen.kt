@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -29,10 +30,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytodo.R
+import com.example.mytodo.data.Item
+import com.example.mytodo.data.ItemsRepository
 import com.example.mytodo.ui.AppViewModelProvider
 import com.example.mytodo.ui.TodoTopAppBar
 import com.example.mytodo.ui.navigation.NavigationDestination
-import com.example.mytodo.ui.theme.MyTodoTheme
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 
 object ItemEntryDestination : NavigationDestination {
@@ -44,8 +48,8 @@ object ItemEntryDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemEntryScreen(
-  navigateBack: () -> Unit,
-  onNavigateUp: () -> Unit,
+  navigateBack: () -> Unit = {},
+  onNavigateUp: () -> Unit = {},
   canNavigateBack: Boolean = true,
   viewModel: ItemEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
@@ -76,6 +80,20 @@ fun ItemEntryScreen(
   }
 }
 
+@Preview(showBackground = true)
+@Composable
+fun ItemEntryScreenPreview() {
+  ItemEntryScreen(
+    viewModel = ItemEntryViewModel(itemsRepository = object : ItemsRepository {
+      override fun getAllItemsStream(): Flow<List<Item>> = emptyFlow()
+      override fun getItemStream(id: Int): Flow<Item?> = emptyFlow()
+      override suspend fun insertItem(item: Item) {}
+      override suspend fun deleteItem(item: Item) {}
+      override suspend fun updateItem(item: Item) {}
+    })
+  )
+}
+
 // ui/item/ItemEntryScreen.ktファイルでは、ItemEntryBody()コンポーザブルは、ステータ・コードの一部として部分的に実装されています。ItemEntryScreen()関数呼び出しの中のItemEntryBody()コンポーザブルを見てください。
 // UI状態とupdateUiStateラムダが関数のパラメータとして渡されていることに注意してほしい。関数の定義を見て、UI状態がどのように更新されているかを確認しよう。
 @Composable
@@ -88,8 +106,12 @@ fun ItemEntryBody(
   modifier: Modifier = Modifier
 ) {
   Column(
-    verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_large)),
-    modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium))
+    verticalArrangement = Arrangement.spacedBy(
+      dimensionResource(id = R.dimen.padding_large)
+    ),
+    modifier = modifier.padding(
+      dimensionResource(id = R.dimen.padding_medium)
+    )
   ) {
     ItemInputForm(
       itemDetails = itemUiState.itemDetails,
@@ -109,7 +131,6 @@ fun ItemEntryBody(
       // 削除ボタン
       Button(
         onClick = onDeleteClick,
-        enabled = itemUiState.isEntryValid,
         shape = MaterialTheme.shapes.small,
         modifier = Modifier.fillMaxWidth(),
         colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.error)
@@ -118,7 +139,6 @@ fun ItemEntryBody(
       }
     }
   }
-
 }
 
 
@@ -144,9 +164,7 @@ fun ItemInputForm(
       onValueChange = { onValueChange(itemDetails.copy(title = it)) },
       label = { Text(stringResource(R.string.todo_name_req)) },
       colors = OutlinedTextFieldDefaults.colors(
-        focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-        unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-        disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+        focusedContainerColor = MaterialTheme.colorScheme.primaryContainer
       ),
       modifier = Modifier.fillMaxWidth(),
       // enabled - このテキストフィールドの有効状態を制御します。
@@ -161,8 +179,8 @@ fun ItemInputForm(
       label = { Text(stringResource(R.string.todo_desc_req)) },
       colors = OutlinedTextFieldDefaults.colors(
         focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-        unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-        disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+        focusedTextColor = Color.Yellow,
+        focusedBorderColor = Color.Red
       ),
       modifier = Modifier.fillMaxWidth(),
       // enabled = enabled,
@@ -202,12 +220,10 @@ fun ItemInputForm(
 
 @Preview(showBackground = true)
 @Composable
-private fun ItemEntryScreenPreview() {
-  MyTodoTheme {
-    ItemEntryBody(itemUiState = ItemUiState(
-      ItemDetails(
-        title = "Item name", description = "10.00"
-      )
-    ), onItemValueChange = {}, onSaveClick = {})
-  }
+private fun ItemEntryBodyPreview() {
+  ItemEntryBody(itemUiState = ItemUiState(
+    ItemDetails(
+      title = "Item name", description = "10.00"
+    )
+  ), onItemValueChange = {}, onSaveClick = {})
 }

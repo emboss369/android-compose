@@ -7,7 +7,7 @@ import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
-// @DaoはRoom が実装を提供するために必要なアノテーション
+
 @Dao
 interface ItemDao {
   @Insert

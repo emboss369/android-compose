@@ -31,10 +31,12 @@ object ItemEditDestination : NavigationDestination {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemEditScreen(
-  navigateBack: () -> Unit,
-  onNavigateUp: () -> Unit,
+  navigateBack: () -> Unit = {},
+  onNavigateUp: () -> Unit = {},
   modifier: Modifier = Modifier,
-  viewModel: ItemEditViewModel = viewModel(factory = AppViewModelProvider.Factory)
+  viewModel: ItemEditViewModel = viewModel(
+    factory = AppViewModelProvider.Factory
+  )
 ) {
   val coroutineScope = rememberCoroutineScope()
   var showDialog by remember { mutableStateOf(false) }
@@ -72,6 +74,5 @@ fun ItemEditScreen(
       },
       onDismiss = { showDialog = false }
     )
-
   }
 }

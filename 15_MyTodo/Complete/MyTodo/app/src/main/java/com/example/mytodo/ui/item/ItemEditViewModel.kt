@@ -7,7 +7,6 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mytodo.data.ItemsRepository
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 //
@@ -24,13 +23,14 @@ open class ItemEditViewModel(
   var itemUiState by mutableStateOf(ItemUiState())
     private set
 
-  private val itemId: Int = checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
+  private val itemId: Int =
+    checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
 
   // 初期化ブロック(init)によって初期化処理を行う
   init {
     viewModelScope.launch {
-      itemsRepository.getItemStream(itemId).collect() { item ->
-        item?.let{
+      itemsRepository.getItemStream(itemId).collect { item ->
+        item?.let {
           itemUiState = it.toItemUiState(true)
         }
       }
@@ -56,7 +56,8 @@ open class ItemEditViewModel(
     itemUiState =
       ItemUiState(
         itemDetails = itemDetails,
-        isEntryValid = validateInput(itemDetails))
+        isEntryValid = validateInput(itemDetails)
+      )
   }
 
   private fun validateInput(

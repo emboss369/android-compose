@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
+open class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
 
 
   //  val homeUiState: StateFlow<HomeUiState> =
@@ -33,13 +33,6 @@ class HomeViewModel(itemsRepository: ItemsRepository) : ViewModel() {
 //    }
 //  }
 
-
-
-
-
-  companion object {
-    private const val TIMEOUT_MILLIS = 5_000L
-  }
 }
 
 

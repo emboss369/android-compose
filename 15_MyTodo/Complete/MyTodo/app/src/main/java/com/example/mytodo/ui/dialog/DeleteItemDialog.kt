@@ -1,27 +1,29 @@
 package com.example.mytodo.ui.dialog
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun DeleteItemDialog(
-    onConfirm: () -> Unit,
-    onDismiss: () -> Unit
-) {
+fun DeleteItemDialog(onConfirm: () -> Unit, onDismiss: () -> Unit) {
   AlertDialog(
-    onDismissRequest = {
-
-    },
+    onDismissRequest = onDismiss,
+    title = { Text(text = "確認") },
+    text = { Text(text = "このTodoアイテムを削除してもよろしいですか？") },
     confirmButton = {
-      // TextButtonはテキストのみのボタンです。背景色はなく、クリック時にはテキストの色が変わります。
-      // 一般的に、ダイアログ内のアクションを実行するために使用されます。
-                    TextButton(onClick = {
-                      onConfirm()
-                    }) {
-                        Text(text = "削除")
-                    }
+      TextButton(onClick = {
+        onConfirm()
+      }) {
+        Text(text = "削除")
+      }
     },
     dismissButton = {
       TextButton(onClick = {
@@ -29,8 +31,24 @@ fun DeleteItemDialog(
       }) {
         Text(text = "キャンセル")
       }
-    },
-    title = { Text(text = "確認") },
-    text = { Text(text = "削除しますか？")},
+    }
   )
+}
+
+@Preview(showBackground = true, widthDp = 400, heightDp = 300)
+@Composable
+fun DeleteItemDialogPreview() {
+  var showDialog by remember { mutableStateOf(false) }
+  Column {
+    Button(onClick = { showDialog = true }) {
+      Text(text = "Show Dialog")
+    }
+    if (showDialog) {
+      DeleteItemDialog(onConfirm = {
+        showDialog = false
+      }, onDismiss = {
+        showDialog = false
+      })
+    }
+  }
 }
