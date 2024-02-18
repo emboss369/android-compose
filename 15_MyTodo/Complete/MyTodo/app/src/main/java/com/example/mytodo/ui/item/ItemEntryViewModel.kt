@@ -7,24 +7,17 @@ import androidx.lifecycle.ViewModel
 import com.example.mytodo.data.Item
 import com.example.mytodo.data.ItemsRepository
 
-
-
-/**
- * ビューモデルを使用して、ルームデータベースにアイテムを検証および挿入します。
- */
-class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewModel() {
-
-  // 現在のアイテムの状態を保持する
+open class ItemEntryViewModel(private val itemsRepository: ItemsRepository) :
+  ViewModel() {
   var itemUiState by mutableStateOf(ItemUiState())
     private set
 
-  // 引数で指定された値で"itemUiState"を更新する。
-  // このメソッドは、入力値のバリデーションもトリガーします。
   fun updateUiState(itemDetails: ItemDetails) {
     itemUiState =
       ItemUiState(
         itemDetails = itemDetails,
-        isEntryValid = validateInput(itemDetails))
+        isEntryValid = validateInput(itemDetails)
+      )
   }
 
   suspend fun saveItem() {
@@ -41,7 +34,7 @@ class ItemEntryViewModel(private val itemsRepository: ItemsRepository) : ViewMod
     }
   }
 }
-// ItemのUi Stateを表します。
+
 data class ItemUiState(
   val itemDetails: ItemDetails = ItemDetails(),
   val isEntryValid: Boolean = false
@@ -54,9 +47,6 @@ data class ItemDetails(
   val done: Boolean = false,
 )
 
-/**
- * [ItemUiState]を[Item]に変換する拡張関数。
- */
 fun ItemDetails.toItem(): Item = Item(
   id = id,
   title = title,
@@ -64,17 +54,12 @@ fun ItemDetails.toItem(): Item = Item(
   done = done
 )
 
-/**
- * Extension function to convert [Item] to [ItemUiState]
- */
-fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState = ItemUiState(
-  itemDetails = this.toItemDetails(),
-  isEntryValid = isEntryValid
-)
+fun Item.toItemUiState(isEntryValid: Boolean = false): ItemUiState =
+  ItemUiState(
+    itemDetails = this.toItemDetails(),
+    isEntryValid = isEntryValid
+  )
 
-/**
- * Extension function to convert [Item] to [ItemDetails]
- */
 fun Item.toItemDetails(): ItemDetails = ItemDetails(
   id = id,
   title = title,
