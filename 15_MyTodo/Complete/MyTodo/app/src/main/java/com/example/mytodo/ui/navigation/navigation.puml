@@ -1,0 +1,13 @@
+@startuml
+title TodoNavHost Screen Navigation
+
+state "HomeScreen" as Home
+state "ItemEntryScreen" as Entry
+state "ItemEditScreen" as Edit
+
+Home --> Entry : navigateToItemEntry
+Home --> Edit : navigateToItemUpdate
+Entry --> Home : navigateBack / onNavigateUp
+Edit --> Home : navigateBack / onNavigateUp
+
+@enduml
