@@ -9,24 +9,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.mytodo.data.ItemsRepository
 import kotlinx.coroutines.launch
 
-//
-/**
- * [ItemsRepository] のデータソースからアイテムを取得・更新する ViewModel です。
- */
 open class ItemEditViewModel(
   savedStateHandle: SavedStateHandle,
   private val itemsRepository: ItemsRepository
 ) : ViewModel() {
-  /**
-   * 現在のアイテムの状態を保持する
-   */
   var itemUiState by mutableStateOf(ItemUiState())
     private set
 
   private val itemId: Int =
     checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
 
-  // 初期化ブロック(init)によって初期化処理を行う
   init {
     viewModelScope.launch {
       itemsRepository.getItemStream(itemId).collect { item ->
@@ -37,9 +29,6 @@ open class ItemEditViewModel(
     }
   }
 
-  /**
-   * Update the item in the [ItemsRepository]'s data source
-   */
   suspend fun updateItem() {
     if (validateInput(itemUiState.itemDetails)) {
       itemsRepository.updateItem(itemUiState.itemDetails.toItem())
@@ -50,8 +39,6 @@ open class ItemEditViewModel(
     itemsRepository.deleteItem(itemUiState.itemDetails.toItem())
   }
 
-  // 引数で指定された値で"itemUiState"を更新する。
-  // このメソッドは、入力値のバリデーションもトリガーします。
   fun updateUiState(itemDetails: ItemDetails) {
     itemUiState =
       ItemUiState(
