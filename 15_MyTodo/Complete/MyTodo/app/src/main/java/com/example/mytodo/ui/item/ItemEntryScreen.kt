@@ -22,7 +22,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
@@ -30,10 +29,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytodo.R
+import com.example.mytodo.TodoTopAppBar
 import com.example.mytodo.data.Item
 import com.example.mytodo.data.ItemsRepository
 import com.example.mytodo.ui.AppViewModelProvider
-import com.example.mytodo.ui.TodoTopAppBar
 import com.example.mytodo.ui.navigation.NavigationDestination
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.emptyFlow
@@ -44,7 +43,6 @@ object ItemEntryDestination : NavigationDestination {
   override val titleRes = R.string.item_entry_title
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ItemEntryScreen(
@@ -54,15 +52,13 @@ fun ItemEntryScreen(
   viewModel: ItemEntryViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
   val coroutineScope = rememberCoroutineScope()
-  Scaffold(
-    topBar = {
-      TodoTopAppBar(
-        title = stringResource(ItemEntryDestination.titleRes),
-        canNavigateBack = canNavigateBack,
-        navigateUp = onNavigateUp
-      )
-    }
-  ) { innerPadding ->
+  Scaffold(topBar = {
+    TodoTopAppBar(
+      title = stringResource(ItemEntryDestination.titleRes),
+      canNavigateBack = canNavigateBack,
+      navigateUp = onNavigateUp
+    )
+  }) { innerPadding ->
     ItemEntryBody(
       itemUiState = viewModel.itemUiState,
       onItemValueChange = viewModel::updateUiState,
@@ -94,8 +90,70 @@ fun ItemEntryScreenPreview() {
   )
 }
 
-// ui/item/ItemEntryScreen.ktファイルでは、ItemEntryBody()コンポーザブルは、ステータ・コードの一部として部分的に実装されています。ItemEntryScreen()関数呼び出しの中のItemEntryBody()コンポーザブルを見てください。
-// UI状態とupdateUiStateラムダが関数のパラメータとして渡されていることに注意してほしい。関数の定義を見て、UI状態がどのように更新されているかを確認しよう。
+@Composable
+fun ItemInputForm(
+  itemDetails: ItemDetails,
+  modifier: Modifier = Modifier,
+  onValueChange: (ItemDetails) -> Unit = {}
+) {
+  Column(
+    modifier = modifier,
+    verticalArrangement = Arrangement.spacedBy(
+      dimensionResource(id = R.dimen.padding_medium)
+    )
+  ) {
+    OutlinedTextField(
+      value = itemDetails.title,
+      onValueChange = { onValueChange(itemDetails.copy(title = it)) },
+      label = { Text(stringResource(R.string.todo_name_req)) },
+      colors = OutlinedTextFieldDefaults.colors(
+        focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer
+      ),
+      modifier = Modifier.fillMaxWidth(),
+      singleLine = true
+    )
+    OutlinedTextField(
+      value = itemDetails.description,
+      onValueChange = { onValueChange(itemDetails.copy(description = it)) },
+      label = { Text(stringResource(R.string.todo_desc_req)) },
+      colors = OutlinedTextFieldDefaults.colors(
+        focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer
+      ),
+      modifier = Modifier.fillMaxWidth(),
+      singleLine = true
+    )
+    Row(
+      Modifier
+        .fillMaxWidth()
+        .height(56.dp)
+        .toggleable(
+          value = itemDetails.done,
+          onValueChange = { onValueChange(itemDetails.copy(done = it)) },
+          role = Role.Checkbox
+        )
+        .padding(horizontal = 16.dp),
+      verticalAlignment = Alignment.CenterVertically
+    ) {
+      Checkbox(checked = itemDetails.done, onCheckedChange = null)
+      Text(
+        text = stringResource(R.string.done),
+        style = MaterialTheme.typography.bodyLarge,
+        modifier = Modifier.padding(start = 16.dp)
+      )
+    }
+    Text(
+      text = stringResource(R.string.required_fields),
+      modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
+    )
+  }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ItemInputFormPreview() {
+  ItemInputForm(itemDetails = ItemDetails())
+}
+
 @Composable
 fun ItemEntryBody(
   itemUiState: ItemUiState,
@@ -118,7 +176,6 @@ fun ItemEntryBody(
       onValueChange = onItemValueChange,
       modifier = Modifier.fillMaxWidth()
     )
-    // 保存ボタン
     Button(
       onClick = onSaveClick,
       enabled = itemUiState.isEntryValid,
@@ -128,7 +185,6 @@ fun ItemEntryBody(
       Text(text = stringResource(R.string.save_action))
     }
     if (showDelete) {
-      // 削除ボタン
       Button(
         onClick = onDeleteClick,
         shape = MaterialTheme.shapes.small,
@@ -141,89 +197,12 @@ fun ItemEntryBody(
   }
 }
 
-
-// temInputForm()コンポーザブル関数の実装を見て、
-// onValueChange関数パラメータに注目してください。
-// ユーザーがテキストフィールドに入力した値でitemDetailsの値を更新しています。
-// Saveボタンが有効になるまでに、itemUiState.itemDetailsには保存が必要な値があります。
-@Composable
-fun ItemInputForm(
-  itemDetails: ItemDetails,
-  modifier: Modifier = Modifier,
-  onValueChange: (ItemDetails) -> Unit = {}
-  // enabledで、編集可能、不可能を制御
-  // ,enabled: Boolean = true
-) {
-  Column(
-    modifier = modifier,
-    verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
-  ) {
-    // マテリアルデザインの outlined text field.
-    OutlinedTextField(
-      value = itemDetails.title,
-      onValueChange = { onValueChange(itemDetails.copy(title = it)) },
-      label = { Text(stringResource(R.string.todo_name_req)) },
-      colors = OutlinedTextFieldDefaults.colors(
-        focusedContainerColor = MaterialTheme.colorScheme.primaryContainer
-      ),
-      modifier = Modifier.fillMaxWidth(),
-      // enabled - このテキストフィールドの有効状態を制御します。
-      // Falseの場合、このコンポーネントはユーザ入力に応答せず、
-      // 視覚的に無効となり、アクセシビリティサービスには無効と表示されます。
-      // enabled = enabled,
-      singleLine = true
-    )
-    OutlinedTextField(
-      value = itemDetails.description,
-      onValueChange = { onValueChange(itemDetails.copy(description = it)) },
-      label = { Text(stringResource(R.string.todo_desc_req)) },
-      colors = OutlinedTextFieldDefaults.colors(
-        focusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
-        focusedTextColor = Color.Yellow,
-        focusedBorderColor = Color.Red
-      ),
-      modifier = Modifier.fillMaxWidth(),
-      // enabled = enabled,
-      singleLine = true
-    )
-    Row(
-      Modifier
-        .fillMaxWidth()
-        .height(56.dp)
-        .toggleable(
-          value = itemDetails.done,
-          onValueChange = { onValueChange(itemDetails.copy(done = it)) },
-          role = Role.Checkbox
-        )
-        .padding(horizontal = 16.dp),
-      verticalAlignment = Alignment.CenterVertically
-    ) {
-      Checkbox(
-        checked = itemDetails.done,
-        onCheckedChange = null // スクリーンリーダーでのアクセシビリティのためにNULLを推奨
-      )
-      Text(
-        text = stringResource(R.string.done),
-        style = MaterialTheme.typography.bodyLarge,
-        modifier = Modifier.padding(start = 16.dp)
-      )
-    }
-    //if (enabled) {
-    Text(
-      text = stringResource(R.string.required_fields),
-      modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_medium))
-    )
-    //}
-  }
-
-}
-
 @Preview(showBackground = true)
 @Composable
-private fun ItemEntryBodyPreview() {
-  ItemEntryBody(itemUiState = ItemUiState(
-    ItemDetails(
-      title = "Item name", description = "10.00"
-    )
-  ), onItemValueChange = {}, onSaveClick = {})
+fun ItemEntryBodyPreview() {
+  ItemEntryBody(
+    itemUiState = ItemUiState(),
+    onItemValueChange = {},
+    onSaveClick = {}
+  )
 }
