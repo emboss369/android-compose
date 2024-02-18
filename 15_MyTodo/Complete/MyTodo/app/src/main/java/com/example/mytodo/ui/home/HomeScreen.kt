@@ -1,6 +1,5 @@
 package com.example.mytodo.ui.home
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -43,12 +42,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mytodo.R
+import com.example.mytodo.TodoTopAppBar
 import com.example.mytodo.data.Item
 import com.example.mytodo.data.ItemsRepository
 import com.example.mytodo.ui.AppViewModelProvider
-import com.example.mytodo.ui.TodoTopAppBar
 import com.example.mytodo.ui.navigation.NavigationDestination
-import com.example.mytodo.ui.theme.MyTodoTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -58,15 +56,14 @@ object HomeDestination : NavigationDestination {
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(
-  navigateToItemEntry: () -> Unit = {}, // FABボタンタップ時の処理
+  navigateToItemEntry: () -> Unit = {},
   navigateToItemUpdate: (Int) -> Unit = {},
   modifier: Modifier = Modifier,
   viewModel: HomeViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
-  // import androidx.compose.runtime.getValue
+
   val itemList by viewModel.homeUiState.itemList.collectAsState(initial = emptyList())
   var showDone by remember { mutableStateOf(false) }
   var filteredItemList by remember(itemList, showDone) {
@@ -76,33 +73,22 @@ fun HomeScreen(
     })
   }
 
-
-  // TopAppBarScrollBehaviorを返します。このTopAppBarScrollBehaviorで設定されたトップアプリバーは、コンテンツがプルアップされると即座に折りたたまれ、コンテンツがプルダウンされると即座に表示されます。
-  // 一部の M3 API は試験運用版とみなされています。その場合は、ExperimentalMaterial3Api アノテーションを使用して、関数レベルまたはファイルレベルでオプトインする必要があります。
-  // または、moduleのbuild.gradleのkotlinOptionsに
-  //　freeCompilerArgs += "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api"
-  // を適用してモジュール全体に適用することも出来ます。
   val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
-
   Scaffold(
-    // nestedScroll:要素を修正し、ネストされたスクロール階層に参加させる。
     modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
     topBar = {
       TodoTopAppBar(
         title = stringResource(R.string.app_name),
-        canNavigateBack = false, // トップ画面なので戻るアイコンは不要です
+        canNavigateBack = false,
         scrollBehavior = scrollBehavior
       )
     },
     floatingActionButton = {
       FloatingActionButton(
-        // FABボタンタップ時の処理
         onClick = navigateToItemEntry,
-        // このFABのコンテナとシャドウの形状を定義する(エレベーションを使用する場合)
         shape = MaterialTheme.shapes.medium,
-        // dimensファイルを新規作成し、padding_largeを定義します。
-        // このようにサイズに関する定義もXMLファイルで管理すると良い。
-        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
+        modifier = Modifier
+          .padding(dimensionResource(id = R.dimen.padding_large))
       ) {
         Icon(
           imageVector = Icons.Default.Add,
@@ -110,6 +96,7 @@ fun HomeScreen(
         )
       }
     }) { innerPadding ->
+
     HomeBody(
       itemList = filteredItemList,
       onItemClick = { navigateToItemUpdate(it.id) },
@@ -119,11 +106,9 @@ fun HomeScreen(
       modifier = Modifier
         .padding(innerPadding)
         .fillMaxSize()
-
     )
   }
 }
-
 
 @Preview(showBackground = true)
 @Composable
@@ -151,21 +136,54 @@ fun HomeScreenPreview() {
   )
 }
 
-//@Composable
-//private fun HomeBody(
-//  itemList: List<Item>,
-//  onItemClick: (Int) -> Unit,
-//  onCheckedChange: (Boolean) -> Unit = {},
-//  modifier: Modifier = Modifier
-//) {
-//
-//      TodoList(
-//        itemList = itemList,
-//        onItemClick = { onItemClick(it.id) },
-//        onCheckedChange = onCheckedChange,
-//        modifier = modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
-//      )
-//}
+@Composable
+private fun TodoItem(
+  item: Item, modifier: Modifier = Modifier
+) {
+  Card(
+    modifier = modifier,
+    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
+  ) {
+    Box(
+      contentAlignment = Alignment.Center
+    ) {
+      Column(
+        modifier = Modifier
+          .padding(dimensionResource(id = R.dimen.padding_large)),
+        verticalArrangement = Arrangement
+          .spacedBy(dimensionResource(id = R.dimen.padding_small))
+      ) {
+        Row(
+
+          modifier = Modifier.fillMaxWidth()
+        ) {
+          Text(
+            text = item.title, style = MaterialTheme.typography.titleLarge
+          )
+          Spacer(Modifier.weight(1f))
+          Text(
+            text = if (item.done) stringResource(R.string.done)
+            else stringResource(R.string.not_yet),
+            style = MaterialTheme.typography.titleMedium
+          )
+        }
+      }
+      if (item.done) {
+        Divider(
+          modifier = Modifier
+            .padding(dimensionResource(id = R.dimen.padding_medium)),
+          color = MaterialTheme.colorScheme.primary
+        )
+      }
+    }
+  }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TodoItemPreview() {
+  TodoItem(item = Item(1, "タイトル", "詳細", true))
+}
 
 @Composable
 private fun HomeBody(
@@ -188,7 +206,7 @@ private fun HomeBody(
         Checkbox(
           checked = checked, onCheckedChange = null
         )
-        Text(text = "完了したTodoも表示する")
+        Text(text = stringResource(R.string.show_completed_todo))
       }
     }
     if (itemList.isEmpty()) {
@@ -209,71 +227,13 @@ private fun HomeBody(
   }
 }
 
-@Composable
-private fun TodoItem(
-  item: Item, modifier: Modifier = Modifier
-) {
-  Card(
-    modifier = modifier,
-    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-  ) {
-    Box(
-      contentAlignment = Alignment.Center
-    ) {
-      Column(
-        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
-      ) {
-        Row(
-          modifier = Modifier.fillMaxWidth()
-        ) {
-          Text(
-            text = item.title, style = MaterialTheme.typography.titleLarge
-          )
-          Spacer(Modifier.weight(1f))
-          Text(
-            text = if (item.done) stringResource(id = R.string.done)
-            else stringResource(id = R.string.not_yet),
-            style = MaterialTheme.typography.titleMedium
-          )
-        }
-      }
-      if (item.done) {
-        Divider(
-          modifier = Modifier.padding(16.dp),
-          color = MaterialTheme.colorScheme.primary
-        )
-      }
-    }
-  }
-}
-
 @Preview(showBackground = true)
 @Composable
 fun HomeBodyPreview() {
-  MyTodoTheme {
-    HomeBody(listOf(
-      Item(1, "Game", "詳細", true),
-      Item(2, "Pen", "詳細", false),
-      Item(3, "TV", "詳細", false)
-    ), onItemClick = {})
-  }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeBodyEmptyListPreview() {
-  MyTodoTheme {
-    HomeBody(listOf(), onItemClick = {})
-  }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TodoItemPreview() {
-  MyTodoTheme {
-    TodoItem(
-      Item(1, "Game", "詳細", true),
+  HomeBody(
+    itemList = listOf(
+      Item(1, "タイトル", "詳細", true),
+      Item(2, "タイトル", "詳細", false)
     )
-  }
+  )
 }
