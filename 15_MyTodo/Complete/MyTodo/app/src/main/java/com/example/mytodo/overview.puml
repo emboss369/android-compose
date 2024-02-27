@@ -1,0 +1,53 @@
+@startuml
+
+object MainActivity {
+  note "アプリケーションのエントリーポイントとなるクラス"
+}
+
+object AppContainer {
+  note "アプリケーションの依存関係を管理するクラス"
+}
+
+object DatabaseItemsRepository {
+  note "データの永続化を担当するクラス"
+}
+
+object TodoNavHost {
+  note "ナビゲーションの管理を担当するクラス"
+}
+
+object HomeScreen {
+  note "ホーム画面のUIを管理するクラス"
+}
+
+object ItemEntryScreen {
+  note "アイテムの新規作成画面のUIを管理するクラス"
+}
+
+object ItemEditScreen {
+  note "アイテムの編集画面のUIを管理するクラス"
+}
+
+object HomeDestination {
+  note "ホーム画面へのナビゲーションを管理するクラス"
+}
+
+object ItemEntryDestination {
+  note "アイテムの新規作成画面へのナビゲーションを管理するクラス"
+}
+
+object ItemEditDestination {
+  note "アイテムの編集画面へのナビゲーションを管理するクラス"
+}
+
+MainActivity --> AppContainer : depends on
+MainActivity --> DatabaseItemsRepository : uses
+MainActivity --> TodoNavHost : uses
+TodoNavHost --> HomeScreen : navigates to
+TodoNavHost --> ItemEntryScreen : navigates to
+TodoNavHost --> ItemEditScreen : navigates to
+HomeScreen --> HomeDestination : navigates to
+ItemEntryScreen --> ItemEntryDestination : navigates to
+ItemEditScreen --> ItemEditDestination : navigates to
+
+@enduml
